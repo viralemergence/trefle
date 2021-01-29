@@ -47,3 +47,20 @@ moderately large floating-point numbers on 64 bits, it is common to have final
 pseudo-probability values of 1, and we rely on the *evidence* for ranking.
 
 [pen]: https://besjournals.onlinelibrary.wiley.com/doi/10.1111/2041-210X.12468
+
+## Model performance
+
+## Computational resources
+
+## Folders organization
+
+## Main results
+
+## How to use `trefle`
+
+⚠️ `trefle` should not be incorporated into your own databases. The associations
+are predictions, and we can estimate how many of them are false positives, and
+how many are missing. In addition, the probability score is not a biologically
+meaningful probability. Unless your database is able to accomodate these
+subtlelties and convey them clearly to the user, we advise you against consuming
+`trefle`. ⚠️
