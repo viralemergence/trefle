@@ -32,6 +32,31 @@ as: hella. We will discuss the computational requirements more below.
 In practice, we can get away with removing the first hyper-parameter of the
 linear filter, as we have reasons to suspect that negative associations can
 often be false negatives. This leaves us with four hyper-parameters to tune.
+
+Because exploring the grid of linear filter parameters would be prohibitive in
+terms of computing time (but also would lead to less interpretable model
+inputs), we picked three initial models: the initial value is the same for all
+associations and determined by the connectance of `clover` (`connectance`); the
+initial value is given by the averaged relative degree of the host and the virus
+(`degree`); the initial value is given by the average of the previous two models
+(`hybrid`).
+
+We applied each model at various depth of low-rank approximation, *i.e.* by
+truncating the SVD to its 1st to 20th singular value. Within each model-rank
+combination, we imputed the value of 780 positive interactions (which we should
+assume are true positive given the nature of the `clover` data), and of 780
+negative interactions (about which we will refrain from making assumptions),
+using LOOCV.
+
+The performance of each model-rank combination was measured using ROC-AUC,
+assuming that negative interactions are true negatives. Note that owing to the
+dimensions of `clover`, the training sample represents less than 1/1000 of the
+entire dataset. Further, for each model we decided on a threshold of evidence
+above which the pseudo-probability should be indicative of an actual association
+by picking the value of evidence which maximizes Youden's J statistic. In the
+overwheling majority of cases, this value of evidence *also* maximized the
+accuracy of the model.
+
 ## Output values
 
 The output value in `trefle` is akin to an association probability (but it is
