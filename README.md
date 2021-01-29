@@ -77,6 +77,14 @@ pseudo-probability values of 1, and we rely on the *evidence* for ranking.
 
 ### Top 10 models
 
+The following table has the 10 best models ranked from first to last, as well as
+the usual measures of model performance derived from the confusion table. In
+addition to the AUC and cutoff (expressed as a *pseudo-probability*), we report
+the true positive and true negative rates (TPR, TNR), the positive and negative
+predictive values (PPV, NPV), the false negative and positive rates (FNR, FPR),
+the false discovery and false omission rates (FDR, FOR), the critical success
+index (CSI), accuracy (ACC), and Youden's J.
+
 | model         | rank | AUC   | cutoff | TPR   | TNR   | PPV   | NPV   | FNR   | FPR   | FDR   | FOR   | CSI   | ACC   | J     |
 |---------------|------|-------|--------|-------|-------|-------|-------|-------|-------|-------|-------|-------|-------|-------|
 | `connectance` | 12   | 0.849 | 0.846  | 0.720 | 0.925 | 0.906 | 0.769 | 0.28  | 0.074 | 0.093 | 0.230 | 0.669 | 0.823 | 0.645 |
@@ -90,7 +98,12 @@ pseudo-probability values of 1, and we rely on the *evidence* for ranking.
 | `connectance` | 7    | 0.836 | 0.948  | 0.655 | 0.957 | 0.939 | 0.735 | 0.344 | 0.042 | 0.060 | 0.264 | 0.628 | 0.806 | 0.613 |
 | `connectance` | 16   | 0.835 | 0.961  | 0.667 | 0.945 | 0.923 | 0.741 | 0.332 | 0.054 | 0.076 | 0.258 | 0.632 | 0.807 | 0.613 |
 
+Following these results, we have conducted the imputation with on the model
+based on connectance and a rank 12 approximation.
+
 ### Overview of the best model
+
+![ROC-AUC](model_performance/roc/rank-12-model-connectance.png)
 ## Computational resources
 
 We assembled `trefle` on the [beluga][beluga] supercomputer, operated by *Calcul
