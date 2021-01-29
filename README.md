@@ -52,6 +52,18 @@ pseudo-probability values of 1, and we rely on the *evidence* for ranking.
 
 ## Computational resources
 
+We assembled `trefle` on the [beluga][beluga] supercomputer, operated by *Calcul
+Québec*, using a pipeline built entirely in [Julia][jl] (1.5.2).
+
+[beluga]: https://www.computecanada.ca/featured/beluga-the-latest-supercomputer-for-canadian-researchers/
+[jl]: https://julialang.org/
+
+Tuning the hyper-parameters required about 2400 core hours, and imputation took
+approximately 59500 core hours. Rounding up, using recent ARC hardware, the
+assembly of `trefle` takes 62000 core hours, or just above 7 core years.
+Assuming a cost of $0.051 per hour (equivalent to what a commercial cloud
+computing provider would charge), the entire `trefle` production process costs
+about $3200.
 ## Folders organization
 
 ## Main results
@@ -64,3 +76,5 @@ how many are missing. In addition, the probability score is not a biologically
 meaningful probability. Unless your database is able to accomodate these
 subtlelties and convey them clearly to the user, we advise you against consuming
 `trefle`. ⚠️
+
+Contact: `timothee.poisot@umontreal.🇨🇦`
