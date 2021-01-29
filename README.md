@@ -89,9 +89,6 @@ assembly of `trefle` takes 62000 core hours, or just above 7 core years.
 Assuming a cost of $0.051 per hour (equivalent to what a commercial cloud
 computing provider would charge), the entire `trefle` production process costs
 about $3200.
-## Folders organization
-
-## Main results
 
 ## How to use `trefle`
 
@@ -103,3 +100,9 @@ subtlelties and convey them clearly to the user, we advise you against consuming
 `trefle`. ⚠️
 
 Contact: `timothee.poisot@umontreal.🇨🇦`
+
+## Repository content
+
+## Main results
+
+## Get involved
