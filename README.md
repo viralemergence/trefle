@@ -99,11 +99,18 @@ index (CSI), accuracy (ACC), and Youden's J.
 | `connectance` | 16   | 0.835 | 0.961  | 0.667 | 0.945 | 0.923 | 0.741 | 0.332 | 0.054 | 0.076 | 0.258 | 0.632 | 0.807 | 0.613 |
 
 Following these results, we have conducted the imputation with on the model
-based on connectance and a rank 12 approximation.
+based on connectance and a rank 12 approximation. Visualisations of all these
+metrics are provided in `model_performance/metrics`.
 
 ### Overview of the best model
 
+The following figure is the ROC AUC, with a depiction of the point maximizing
+Youden's J and the probability cutoff associated:
+
 ![ROC-AUC](model_performance/roc/rank-12-model-connectance.png)
+
+Visualisations of the same curve for all model-rank combinations are in
+`model_performance/roc`.
 ## Computational resources
 
 We assembled `trefle` on the [beluga][beluga] supercomputer, operated by *Calcul
