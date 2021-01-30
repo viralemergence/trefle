@@ -1,10 +1,15 @@
 # A data-inflated host-virus association database
 
-C'est quoi, `trefle`? It is a data product derived from the [`clover`][clover]
-database of mammals-virus association. Specifically, `trefle` was produced using
-LF-SVD imputation, a two-step algorithm where novel host-virus associations are
+C'est quoi, `trefle`?
+
+It is a data product derived from the [`clover`][clover] database of
+mammals-virus association. Specifically, `trefle` was produced using LF-SVD
+imputation, a two-step algorithm where novel host-virus associations are
 recommended based on truncated singular value decomposition applied to initial
 values based on a linear filter.
+
+[![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+
 
 [clover]: https://github.com/viralemergence/clover
 
@@ -236,3 +241,11 @@ final amount of overlap is rather large anyways.
 See `artifacts/sharing-phylogeny.csv`
 
 ## Get involved
+
+If  you want to develop an analysis, **please open an issue** (and if you want to
+start working, please make an explicitely named branch).
+
+If you have to create new data files, please mind the current directory, and
+when in dout, ask @tpoisot.
+
+If you require a new data file to be created for you, ask @tpoisot.
