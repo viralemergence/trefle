@@ -3,27 +3,18 @@ import CSV
 using StatsPlots
 using Statistics
 
-function read_df(f)
-    d = DataFrame(CSV.File(f))
-    r = parse(Int64, split(split(f, "rank-")[2], ".")[1])
-    d.rank = fill(r, size(d, 1))
-    return d
-end
-
-tuning_files = joinpath.("tuning", readdir("tuning"))
-filter!(r -> contains(r, "rank-"), tuning_files)
-tuning = vcat(read_df.(tuning_files)...)
+tuning = DataFrame(CSV.File("hpc/outputs/tuning.csv"))
 
 logistic = (x) -> 1.0 / (1.0 + exp(-x))
 logit = (p) -> log(p/(1.0-p))
 
-res.evidence = (res.updated ./ res.initial) .- 1.0
-res.P = logistic.(res.evidence)
+tuning.evidence = (tuning.updated ./ tuning.initial) .- 1.0
+tuning.P = logistic.(tuning.evidence)
 
-@df res density(:P, group=(:value), fill=(0, 0.2))
+@df tuning density(:P, group=(:value), fill=(0, 0.2), legend=:topleft, frame=:box, dpi=300)
 xaxis!((0,1), "Post-imputation probability")
 yaxis!((0, 8))
-vline!([0.84])
+savefig("model_performance/probabilities.png")
 
 # Thresholding
 thr_results = DataFrame(model=String[], rank=Int64[], AUC=Float64[], cutoff=Float64[],
@@ -32,9 +23,9 @@ thr_results = DataFrame(model=String[], rank=Int64[], AUC=Float64[], cutoff=Floa
     CSI=Float64[], ACC=Float64[], J=Float64[]
     )
 
-for mod in unique(res.model)
-    for rank in unique(res.rank)
-        comb = res[(res.model .== mod) .& (res.rank .== rank), :]
+for mod in unique(tuning.model)
+    for rank in unique(tuning.rank)
+        comb = res[(tuning.model .== mod) .& (tuning.rank .== rank), :]
         S = LinRange(minimum(comb.P), maximum(comb.P), 1000)
         TP = zeros(Int64, length(S))
         FP = zeros(Int64, length(S))

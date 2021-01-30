@@ -73,6 +73,10 @@ pseudo-probability values of 1, and we rely on the *evidence* for ranking.
 
 [pen]: https://besjournals.onlinelibrary.wiley.com/doi/10.1111/2041-210X.12468
 
+The following figure is an illustration of the resulting probabilities in an ensemble model of all of the model candidates used during tuning - the little bump in values that are `false` around 1 are candidate false negatives:
+
+![proba ensemble](model_performance/probabilities.png)
+
 ## Model performance
 
 ### Top 10 models
