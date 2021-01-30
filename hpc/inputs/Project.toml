@@ -1,0 +1,7 @@
+[deps]
+CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
+DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
+EcologicalNetworks = "f03a62fe-f8ab-5b77-a061-bb599b765229"
+IJulia = "7073ff75-c697-5162-941a-fcdaad2a7d2a"
+StatsBase = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
+StatsPlots = "f3b207a7-027a-5e70-b257-86293d7955fd"
