@@ -155,6 +155,8 @@ Contact: `timothee.poisot@umontreal.🇨🇦`
     - `roc` has all the plots of ROC-AUCs
     - `metrics` has the plots of all metrics presented in the table above
 - `imputation` has the files to read the data from `hpc/outputs` and do the analyses
+- `artifacts` has derived data tables
+    - `modelselection.csv` is the list of all models considered during hyper-parameters tuning
 
 [almost_surely]: https://en.wikipedia.org/wiki/Almost_surely
 ## Main results

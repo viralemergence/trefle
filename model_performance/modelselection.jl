@@ -17,7 +17,7 @@ yaxis!((0, 8))
 savefig("model_performance/probabilities.png")
 
 # Thresholding
-thr_results = DataFrame(model=String[], rank=Int64[], AUC=Float64[], cutoff=Float64[],
+thresholding_results = DataFrame(model=String[], rank=Int64[], AUC=Float64[], cutoff=Float64[],
     TPR=Float64[], TNR=Float64[], PPV=Float64[], NPV=Float64[],
     FNR=Float64[], FPR=Float64[], FDR=Float64[], FOR=Float64[],
     CSI=Float64[], ACC=Float64[], J=Float64[]
@@ -25,7 +25,7 @@ thr_results = DataFrame(model=String[], rank=Int64[], AUC=Float64[], cutoff=Floa
 
 for mod in unique(tuning.model)
     for rank in unique(tuning.rank)
-        comb = res[(tuning.model .== mod) .& (tuning.rank .== rank), :]
+        comb = tuning[(tuning.model .== mod) .& (tuning.rank .== rank), :]
         S = LinRange(minimum(comb.P), maximum(comb.P), 1000)
         TP = zeros(Int64, length(S))
         FP = zeros(Int64, length(S))
@@ -58,7 +58,7 @@ for mod in unique(tuning.model)
         dy = [reverse(TPR)[i] + reverse(TPR)[i - 1] for i in 2:length(TPR)]
         AUC = sum(dx .* (dy ./ 2.0))
         
-        push!(thr_results,
+        push!(thresholding_results,
                 (mod, rank, AUC, p_cutoff, 
                     TPR[best_J],
                     TNR[best_J],
@@ -83,12 +83,12 @@ for mod in unique(tuning.model)
         p_cutoff = round(S[best_J]; digits=2)
         cutoff_text = text("P ≈ $(round(p_cutoff; digits=2))\nAUC ≈ $(round(AUC; digits=2))", :black, :left, 7)
         annotate!(([FPR[best_J] + 0.05], [FPR[best_J]], cutoff_text))
-        savefig(joinpath("roc", "rank-$(rank)-model-$(mod).png"))
-
+        savefig(joinpath("model_performance", "roc", "rank-$(rank)-model-$(mod).png"))
     end
 end
 
-sort!(thr_results, :AUC, rev=true)
+sort!(thresholding_results, :AUC, rev=true)
+CSV.write("artifacts/modelselection.csv", thresholding_results)
 
 diags = ["AUC" => :AUC,
 "Probability cutoff" => :cutoff,
@@ -104,11 +104,11 @@ diags = ["AUC" => :AUC,
 "Accuracy" => :ACC,
 "Youden's index" => :J]
 
-thr_plot = sort(thr_results, :rank)
+thr_plot = sort(thresholding_results, :rank)
 
 for (t, p) in diags
     plot(thr_plot[!, :rank], thr_plot[!, p], group=(thr_plot[!,:model]), legend=:outertopright, m=:circle, msw=0.0, dpi=300)
     xaxis!("Approximation rank", (1, 20))
     yaxis!(t, (0, 1))
-    savefig("metrics/svd-tuning-output-$(p).png")
+    savefig("model_performance/metrics/svd-tuning-output-$(p).png")
 end
