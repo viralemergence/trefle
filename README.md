@@ -186,5 +186,17 @@ Contact: `timothee.poisot@umontreal.🇨🇦`
 [almost_surely]: https://en.wikipedia.org/wiki/Almost_surely
 ## Main results
 
+### Imputation changes the network
 
+The LF-SVD approach suggested 75901 new interactions, from the original 5494 in
+`clover`. With a total of 81395 interactions, `trefle` has a connectance of
+0.09, which is well within the range of connectances for antagonistic bipartite
+networks.
+
+The following figure is the result of a 2-dimensional tSNE embedding of `clover` (left) and `trefle` (right):
+
+![before-after](figures/before-after.png)
+
+Not only can we see an increase in the degree of most nodes, we can also see the
+shape of the network change, with less clusters of mostly homogenous species.
 ## Get involved

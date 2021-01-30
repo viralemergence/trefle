@@ -54,67 +54,6 @@ end
 sort!(d, :virus)
 CSV.write("artifacts/trefle.csv", d)
 
-# ROC AUC analysis on the full dataset
-S = LinRange(0.0, 1.0, 1000)
-TP = zeros(Int64, length(S))
-FP = zeros(Int64, length(S))
-TN = zeros(Int64, length(S))
-FN = zeros(Int64, length(S))
-for (i, s) in enumerate(S)
-    pred = predictions.P .>= s
-    TP[i] = sum((predictions.value .== pred) .& predictions.value)
-    FP[i] = sum(pred .> predictions.value)
-    TN[i] = sum((predictions.value .== pred) .& .!(predictions.value))
-    FN[i] = sum(pred .< predictions.value)
-end
-
-TPR = TP ./ (TP .+ FN)
-TNR = TN ./ (TN .+ FP)
-PPV = TP ./ (TP .+ FP)
-NPV = TN ./ (TN .+ FN)
-FNR = FN ./ (FN .+ TP)
-FPR = FP ./ (FP .+ TN)
-FDR = FP ./ (FP .+ TP)
-FOR = FN ./ (FN .+ TN)
-CSI = TP ./ (TP .+ FN .+ FP)
-ACC = (TP .+ TN) ./ (TP .+ TN .+ FP .+ FN)
-J = (TP ./ (TP .+ FN)) .+ (TN ./ (TN .+ FP)) .- 1.0
-best_J = last(findmax(J))
-
-plot(S, ACC, legend=false, c=:black, lw=2, frame=:box, aspectratio=1)
-vline!([0.846847], c=:grey, ls=:dash)
-xaxis!((0,1), "Cutoff")
-yaxis!((0,1), "Accuracy")
-
-plot(S, FNR, lab="False negatives", c=:black, lw=2, frame=:box, aspectratio=1, legend=:top)
-plot!(S, FPR, lab="False positives", c=:black, lw=2, ls=:dash)
-vline!([0.846847], c=:grey, ls=:dot, lab="")
-xaxis!((0,1), "Cutoff")
-yaxis!((0,1), "Rates")
-
-plot(S, TNR, lab="True negatives", c=:black, lw=2, frame=:box, aspectratio=1, legend=:bottom)
-plot!(S, TPR, lab="True positives", c=:black, lw=2, ls=:dash)
-vline!([0.846847], c=:grey, ls=:dot, lab="")
-xaxis!((0,1), "Cutoff")
-yaxis!((0,1), "Rates")
-
-p_cutoff = S[best_J]
-
-
-dx = [reverse(FPR)[i] - reverse(FPR)[i - 1] for i in 2:length(FPR)]
-dy = [reverse(TPR)[i] + reverse(TPR)[i - 1] for i in 2:length(TPR)]
-AUC = sum(dx .* (dy ./ 2.0))
-
-plot([0,1], [0,1], lab="", aspectratio=1, frame=:box, c=:grey, ls=:dash)
-yaxis!((0, 1), "True Positive Rate")
-xaxis!((0, 1), "False Positive Rate")
-plot!(FPR, TPR, c=:orange, lw=1, lab="", ls=:dash, fill=(:orange, [FPR, FPR], 0.1))
-plot!([FPR[best_J],FPR[best_J]], [FPR[best_J],TPR[best_J]], c=:orange, lab="")
-scatter!([FPR[best_J]], [TPR[best_J]], c=:orange, lab="", msw=0.0)
-p_cutoff = round(S[best_J]; digits=2)
-cutoff_text = text("P ≈ $(round(p_cutoff; digits=2))\nAUC ≈ $(round(AUC; digits=2))", :black, :left, 7)
-annotate!(([FPR[best_J] + 0.05], [FPR[best_J]], cutoff_text))
-
 # Degree distribution
 function Pk(N::T; dims::Union{Nothing,Integer}=nothing) where {T<:AbstractEcologicalNetwork}
     deg = collect(values(degree(N; dims=dims)))
@@ -126,6 +65,7 @@ function Pk(N::T; dims::Union{Nothing,Integer}=nothing) where {T<:AbstractEcolog
     return (u, p./sum(p))
 end
 
+#=
 plot(Pk(clover; dims=1)..., lab="Raw data", c=:grey, ls=:dash)
 plot!(Pk(imputed_clover; dims=1)..., lab="Post imputation", c=:black)
 xaxis!(:log, "Virus degree", (1, 1e3))
@@ -143,6 +83,7 @@ plot!(Pk(imputed_clover)..., lab="Post imputation", c=:black)
 xaxis!(:log, "Degree", (1, 1e3))
 yaxis!(:log, (0.0005, 1.0), "Frequency")
 savefig("mainfigs/degree-global.png")
+=#
 
 # Embedding
 UCLOV = EcologicalNetworks.mirror(convert(UnipartiteNetwork, clover))
@@ -163,11 +104,11 @@ for (i,s) in enumerate(species(UIMPT))
     IM[s].y = emb_impt[i,2]
 end
 
-scatter(IO, clover, bipartite=true, nodesize=degree(clover), msc=:grey, aspectratio=1)
-savefig("mainfigs/tsne-original.png")
+p_orig = scatter(IO, clover, bipartite=true, nodesize=degree(clover), msc=:darkgrey, msw=0.5, aspectratio=1, dpi=300)
+p_imput = scatter(IM, imputed_clover, bipartite=true, nodesize=degree(imputed_clover), msc=:darkgrey, msw=0.5, aspectratio=1, dpi=300)
 
-scatter(IM, imputed_clover, bipartite=true, nodesize=degree(imputed_clover), msc=:grey, aspectratio=1)
-savefig("mainfigs/tsne-imputed.png")
+plot(p_orig, p_imput)
+savefig("figures/before-after.png")
 
 # Overlap analysis
 overlap_results = DataFrame(sp = String[], step = Symbol[], score = Float64[])
