@@ -104,8 +104,8 @@ for (i,s) in enumerate(species(UIMPT))
     IM[s].y = emb_impt[i,2]
 end
 
-p_orig = scatter(IO, clover, bipartite=true, nodesize=degree(clover), msc=:darkgrey, msw=0.5, aspectratio=1, dpi=300)
-p_imput = scatter(IM, imputed_clover, bipartite=true, nodesize=degree(imputed_clover), msc=:darkgrey, msw=0.5, aspectratio=1, dpi=300)
+p_orig = scatter(IO, clover, bipartite=true, nodesize=degree(clover), msc=:skyblue, msw=0.5, aspectratio=1, dpi=300)
+p_imput = scatter(IM, imputed_clover, bipartite=true, nodesize=degree(imputed_clover), msc=:teal, msw=0.5, aspectratio=1, dpi=300)
 
 plot(p_orig, p_imput)
 savefig("figures/before-after.png")
