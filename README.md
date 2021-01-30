@@ -181,6 +181,7 @@ Contact: `timothee.poisot@umontreal.🇨🇦`
     - `zoonoses.csv` is the list of the subset of suspected positive associations involving *H. sapiens* - associations are ranked from least to most likely
     - `trefle.csv` is the edgelist of `clover` plus the imputed associations, sorted by virus name (~ 3MB)
     - `phylo_distance_to_human.csv` is the phylogenetic distance between *H. sapiens* and other taxa in the Upham tree
+    - `sharing-phylogeny.csv` is a table with the Jaccard similarity of viruses, number of shared viruses, and phylogenetic distance between pairs of hosts -- it contains both the *before* and *after*  imputation step
 - `R` has `.r` files to read the phylogeny
 
 [almost_surely]: https://en.wikipedia.org/wiki/Almost_surely
@@ -194,7 +195,8 @@ The LF-SVD approach suggested 75901 new interactions, from the original 5494 in
 0.09, which is well within the range of connectances for antagonistic bipartite
 networks.
 
-The following figure is the result of a 2-dimensional tSNE embedding of `clover` (left) and `trefle` (right):
+The following figure is the result of a 2-dimensional tSNE embedding of `clover`
+(left) and `trefle` (right):
 
 ![before-after](figures/before-after.png)
 
@@ -214,5 +216,23 @@ to human after imputation are mostly primates (chimpanzees and both gorilla
 species). Some rodents are also joining the top 10. This result suggests that
 the LF-SVD approach is able to somewhat overcome the initial data bias.
 
+### LF-SVD predicts associations between species not shared by databases
+
+In the next figure, we look at the probability of association as a function of
+whether the two species were reported as part of the same database that went
+into making `clover`:
+
+![similarity to human](figures/probability-by-cooccurrence.png)
+
+There is little to report here - the method is indeed able to predict
+associations between species that were non-overlapping across data sources. Due
+to the effort that went into reconciling the taxonomic names in `clover`, the
+final amount of overlap is rather large anyways.
+
 ### Phylogenetic distance as a predictor of viral sharing
+
+**Analysis in development**: @cjcarlson and @danieljbecker and @gfalbery
+
+See `artifacts/sharing-phylogeny.csv`
+
 ## Get involved

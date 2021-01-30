@@ -172,10 +172,14 @@ for i in 1:size(imputed, 1)
     imputed.cooc[i] = length(dbvirus ∩ dbhost) > 0
 end
 
-@df imputed dotplot(:cooc, :P, group=:cooc)
+@df imputed density(:P, group=:cooc, frame=:box, legend=:topleft, dpi=300)
+xaxis!((0.846847, 1.0), "Probability")
+yaxis!((0, 45),)
+savefig("figures/probability-by-cooccurrence.png")
+
 
 # Phylogeny - rank correlation
-phylodist = DataFrame(CSV.File("data/human_distances.csv"))
+phylodist = DataFrame(CSV.File("artifacts/phylo_distance_to_human.csv"))
 rename!(phylodist, "Column1" => "sp")
 phylodist.sp = map(n -> replace(n, "_" => " "), phylodist.sp)
 
@@ -193,24 +197,6 @@ for r in filter(p -> "Homo sapiens" in p.first, imp_share)
     push!(sharing_results, (sp, :imputed, r.second))
 end
 
+sharing_results = leftjoin(sharing_results, select(overlap_results, :sp, :score), on=:sp)
 phyloverlap = leftjoin(sharing_results, phylodist, on=:sp)
-phyloverlap = leftjoin(phyloverlap, select(overlap_results, :sp, :score), on=:sp)
-
-@df phyloverlap scatter(:phylodist, :count, group=:step)
-xaxis!("Phylogenetic distance")
-yaxis!("Shared viruses")
-savefig("mainfigs/phylodistance.png")
-
-dropmissing!(phyloverlap)
-
-phyloverlap.D = log.(phyloverlap.phylodist)
-
-CSV.write("overlap.csv", phyloverlap)
-
-share_model = negbin(
-    @formula(count ~ phylodist+step),
-    phyloverlap,
-    LogLink()
-)
-
-println("Estimated theta = ", round(share_model.model.rr.d.r, digits=5))
+CSV.write("artifacts/sharing-phylogeny.csv", phyloverlap)
