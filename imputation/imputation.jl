@@ -37,8 +37,10 @@ imputed = @linq predictions |>
     select(:value, :host, :virus, :evidence, :P) |>
     orderby(:evidence)
 
+CSV.write("artifacts/imputed_associations.csv", select(imputed, Not(:value)))
+
 zoonoses = @where(imputed, :host .== "Homo sapiens")
-CSV.write("zoonoses.csv", zoonoses)
+CSV.write("artifacts/zoonoses.csv", select(zoonoses, Not(:value)))
 
 imputed_clover = copy(clover)
 for r in eachrow(imputed)

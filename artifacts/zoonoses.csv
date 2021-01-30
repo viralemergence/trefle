@@ -1,0 +1,219 @@
+host,virus,evidence,P
+Homo sapiens,Pipapillomavirus 2,1.8465356819373602,0.8637198390373215
+Homo sapiens,Phipapillomavirus 1,2.2924461903714257,0.9082495005242104
+Homo sapiens,Papio hamadryas adenovirus 1,2.980876911676355,0.9517026942106813
+Homo sapiens,Bukalasa bat virus,3.0217392661354383,0.9535466278743213
+Homo sapiens,Chiropteran tetraparvovirus 1,3.037709447514189,0.9542489324716971
+Homo sapiens,Jaagsiekte sheep retrovirus,3.462647438330449,0.9696060841499099
+Homo sapiens,Oita ledantevirus,3.467451686078305,0.9697473469597832
+Homo sapiens,Keuraliba ledantevirus,3.532697109019434,0.971603919580327
+Homo sapiens,Taterapox virus,3.5326971090195523,0.9716039195803303
+Homo sapiens,Phnom Penh bat virus,4.1122769460599775,0.9838932179796802
+Homo sapiens,Pegivirus B,4.143347837397512,0.9843782774920806
+Homo sapiens,Witwatersrand orthobunyavirus,4.444214687953413,0.9883900473576438
+Homo sapiens,Khujand lyssavirus,4.484822245162254,0.988846902365917
+Homo sapiens,Saimiriine betaherpesvirus 4,4.505057222708088,0.9890678746305631
+Homo sapiens,Dyoomikronpapillomavirus 1,4.505057222708098,0.9890678746305631
+Homo sapiens,Squirrel monkey retrovirus,4.505057222708101,0.9890678746305633
+Homo sapiens,Equine infectious anemia virus,4.76082674124965,0.9915140960884589
+Homo sapiens,Langur virus,4.972405306243513,0.9931211782307212
+Homo sapiens,Mount Elgon bat ledantevirus,5.664062510302286,0.9965435903674205
+Homo sapiens,Suid gammaherpesvirus 3,6.203247793525273,0.9979812335056993
+Homo sapiens,Arumowot phlebovirus,7.074072833130572,0.9991539391312853
+Homo sapiens,Mule deerpox virus,7.245833644078207,0.9992873688049123
+Homo sapiens,Dyoetapapillomavirus 1,7.296801343015911,0.9993227559188217
+Homo sapiens,Araguari virus,7.491706526864682,0.9994426204110184
+Homo sapiens,Phacochoerus africanus cytomegalovirus 1,8.076197255430605,0.9996892457210768
+Homo sapiens,Suiformes rhadinovirus genogroup 1,8.076197255430623,0.9996892457210768
+Homo sapiens,Allpahuayo mammarenavirus,8.327872048243794,0.9997583726041315
+Homo sapiens,Kirsten murine sarcoma virus,8.549358303153411,0.9998063681638539
+Homo sapiens,Barur ledantevirus,8.549358303153443,0.9998063681638542
+Homo sapiens,Harvey murine sarcoma virus,8.549358303153502,0.9998063681638542
+Homo sapiens,Deltapapillomavirus 2,8.616663027194408,0.9998189693265093
+Homo sapiens,Avastrovirus 2,9.293639991245321,0.9999080009212504
+Homo sapiens,Feline foamy virus,9.50325420853579,0.9999253969237042
+Homo sapiens,Carnivore amdoparvovirus 2,9.690452013353244,0.999938132396454
+Homo sapiens,Bovine mastadenovirus B,9.8853687883054,0.9999490883968777
+Homo sapiens,Parapoxvirus of red deer in New Zealand,9.988124003054965,0.9999540597971106
+Homo sapiens,Ovine mastadenovirus A,10.37706005877812,0.9999688622982155
+Homo sapiens,Possum atadenovirus A,10.541218000842974,0.9999735761732125
+Homo sapiens,Lambdapapillomavirus 5,10.993698560553883,0.999983193004639
+Homo sapiens,Eubenangee virus,11.22275503413682,0.9999866336259035
+Homo sapiens,Bovine gammaherpesvirus 6,11.410511331910811,0.999988921701022
+Homo sapiens,Sakobuvirus A,11.45798021573519,0.9999894352839159
+Homo sapiens,Shimoni bat lyssavirus,11.878915073717168,0.9999930649480191
+Homo sapiens,Yogue virus,12.218770144761438,0.9999950631105035
+Homo sapiens,Psipapillomavirus 1,12.218770144761443,0.9999950631105035
+Homo sapiens,Simian virus 12,12.351163524527454,0.9999956753002816
+Homo sapiens,Bat mastadenovirus A,12.4179365860419,0.9999959546425031
+Homo sapiens,Mink enteric sapovirus,12.454512382900536,0.9999960999308842
+Homo sapiens,Mink calicivirus,12.4545123829006,0.9999960999308842
+Homo sapiens,Ground squirrel hepatitis virus,12.747897945621864,0.9999970915807982
+Homo sapiens,Torque teno felis virus 2,13.448346358649378,0.9999985563671405
+Homo sapiens,Carnivore bocaparvovirus 3,13.448346358649449,0.9999985563671405
+Homo sapiens,Dyothetapapillomavirus 1,13.448346358649452,0.9999985563671405
+Homo sapiens,Minatitlan orthobunyavirus,13.687825863404317,0.9999988638065931
+Homo sapiens,Pipistrellus bat coronavirus HKU5,13.774025664781725,0.9999989576436714
+Homo sapiens,Torque teno tamarin virus,13.877765908204424,0.9999990603579648
+Homo sapiens,Cricetid gammaherpesvirus 2,14.270855828453582,0.9999993657714527
+Homo sapiens,Deltapapillomavirus 6,14.45774783905502,0.9999994738862353
+Homo sapiens,Ngaingan hapavirus,14.696743683997026,0.9999995857284243
+Homo sapiens,Royal Farm virus,14.763073639192797,0.999999612315521
+Homo sapiens,African horse sickness virus,14.849168191789847,0.9999996442965815
+Homo sapiens,Bear Canyon mammarenavirus,14.878588007139307,0.9999996546088702
+Homo sapiens,Alphaarterivirus equid,15.005596293823032,0.9999996958049099
+Homo sapiens,Bokeloh bat lyssavirus,15.222400239635089,0.9999997550962314
+Homo sapiens,Aravan lyssavirus,15.784888032037728,0.9999998604563206
+Homo sapiens,Mosavirus A,15.817185454367394,0.9999998648912178
+Homo sapiens,Macacine gammaherpesvirus 4,16.029131256064236,0.9999998906958383
+Homo sapiens,Primate erythroparvovirus 3,16.02913125606428,0.9999998906958383
+Homo sapiens,Small ruminant morbillivirus,16.076427620427832,0.9999998957451781
+Homo sapiens,Cowbone Ridge virus,16.35877507368384,0.9999999213906472
+Homo sapiens,Iotapapillomavirus 1,17.12767409241501,0.9999999635627461
+Homo sapiens,Luna mammarenavirus,17.12767409241505,0.9999999635627461
+Homo sapiens,Bubaline alphaherpesvirus 1,17.144875212991334,0.9999999641841482
+Homo sapiens,Murid betaherpesvirus 1,17.190667214219904,0.999999965787243
+Homo sapiens,Itaporanga phlebovirus,17.74009303227564,0.9999999802496189
+Homo sapiens,Jurona vesiculovirus,17.740093032275784,0.9999999802496189
+Homo sapiens,African green monkey simian foamy virus,17.837584502798855,0.9999999820842304
+Homo sapiens,Ungulate tetraparvovirus 4,18.062645326069116,0.9999999856948374
+Homo sapiens,Deltapapillomavirus 3,18.063966283768966,0.9999999857137214
+Homo sapiens,Ovine mastadenovirus B,18.063966283769012,0.9999999857137214
+Homo sapiens,Dyokappapapillomavirus 1,18.063966283769048,0.9999999857137214
+Homo sapiens,Paraguayan mammarenavirus,18.125508790424607,0.9999999865664269
+Homo sapiens,Ateline gammaherpesvirus 3,18.372398502632734,0.9999999895053319
+Homo sapiens,Caviid herpesvirus 1,19.05150563629722,0.9999999946784734
+Homo sapiens,Caviid betaherpesvirus 2,19.05150563629728,0.9999999946784734
+Homo sapiens,Caviid herpesvirus 3,19.051505636297314,0.9999999946784734
+Homo sapiens,Guinea pig adenovirus,19.05150563629733,0.9999999946784734
+Homo sapiens,Guinea pig type-c oncovirus,19.051505636297353,0.9999999946784734
+Homo sapiens,Yaounde virus,19.05548088829557,0.9999999946995859
+Homo sapiens,Saboya virus,19.270238225188397,0.9999999957239589
+Homo sapiens,Deer atadenovirus A,19.69785028137906,0.9999999972117461
+Homo sapiens,Ovine atadenovirus D,19.928895494584932,0.9999999977869529
+Homo sapiens,Muleshoe hantavirus,20.46738768943647,0.9999999987084047
+Homo sapiens,Jutiapa virus,20.46738768943653,0.9999999987084047
+Homo sapiens,Papiine alphaherpesvirus 2,20.557749404969876,0.9999999988199977
+Homo sapiens,Sigmapapillomavirus 1,20.639148258045655,0.9999999989122432
+Homo sapiens,Caprine arthritis encephalitis virus,21.11717118602972,0.9999999993255821
+Homo sapiens,Sheeppox virus,21.1171711860299,0.9999999993255821
+Homo sapiens,Goatpox virus,21.117171186030077,0.9999999993255821
+Homo sapiens,Avian orthoreovirus,21.187794447607935,0.9999999993715687
+Homo sapiens,Murine respirovirus,22.439738042938426,0.9999999998203011
+Homo sapiens,Mamastrovirus 10,22.849695291438152,0.9999999998807376
+Homo sapiens,Rhinolophus bat coronavirus HKU2,22.860291510242835,0.9999999998819946
+Homo sapiens,Mamastrovirus 17,23.30032432525196,0.9999999999240028
+Homo sapiens,Klamath tupavirus,23.37354200471659,0.9999999999293683
+Homo sapiens,Aotine betaherpesvirus 1,23.746032092381512,0.9999999999513336
+Homo sapiens,Torque teno douroucouli virus,23.746032092381558,0.9999999999513336
+Homo sapiens,Entebbe bat virus,23.959633420879424,0.9999999999606937
+Homo sapiens,Canine parainfluenza virus,25.8615618258156,0.9999999999941322
+Homo sapiens,Murid herpesvirus 5,26.734865345762035,0.9999999999975497
+Homo sapiens,Canid alphaherpesvirus 1,27.16765935644081,0.9999999999984106
+Homo sapiens,Betapapillomavirus 6,28.37512113739413,0.9999999999995248
+Homo sapiens,Mamastrovirus 15,29.27899409784417,0.9999999999998075
+Homo sapiens,Ippy mammarenavirus,30.128099433992833,0.9999999999999176
+Homo sapiens,Acara orthobunyavirus,30.591910274534417,0.9999999999999483
+Homo sapiens,Benevides orthobunyavirus,30.59191027453747,0.9999999999999483
+Homo sapiens,San Perlita virus,34.09743703597039,0.9999999999999984
+Homo sapiens,Sal Vieja virus,34.097437035970515,0.9999999999999984
+Homo sapiens,Equid alphaherpesvirus 4,34.280808035515165,0.9999999999999987
+Homo sapiens,Hepatitis GB virus B,34.342033069275814,0.9999999999999989
+Homo sapiens,Mustelid gammaherpesvirus 1,34.59687430934367,0.9999999999999991
+Homo sapiens,Mamastrovirus 18,34.69813219574592,0.9999999999999991
+Homo sapiens,Visna-maedi virus,34.78759376901287,0.9999999999999991
+Homo sapiens,Lloviu cuevavirus,35.16610472501493,0.9999999999999996
+Homo sapiens,Yokose virus,35.166104725015025,0.9999999999999996
+Homo sapiens,Mischivirus A,35.16610472501503,0.9999999999999996
+Homo sapiens,West Caucasian bat lyssavirus,35.16610472501507,0.9999999999999996
+Homo sapiens,Epizootic hemorrhagic disease virus,35.40451782115397,0.9999999999999996
+Homo sapiens,Wad Medani virus,35.5912986756591,0.9999999999999996
+Homo sapiens,Murid gammaherpesvirus 7,35.622208517184326,0.9999999999999996
+Homo sapiens,Miniopterus bat coronavirus 1,36.43290179313832,0.9999999999999998
+Homo sapiens,Latino mammarenavirus,36.46954391041104,0.9999999999999998
+Homo sapiens,Torque teno zalophus virus 1,36.76885417949313,1.0
+Homo sapiens,Pinniped bocaparvovirus 1,36.76885417949315,1.0
+Homo sapiens,Dyonupapillomavirus 1,36.768854179493154,1.0
+Homo sapiens,Pinniped dependoparvovirus 1,36.76885417949321,1.0
+Homo sapiens,Pinniped bocaparvovirus 2,36.76885417949327,1.0
+Homo sapiens,Mamastrovirus 4,36.7724691823266,1.0
+Homo sapiens,Equid alphaherpesvirus 8,37.7888572868131,1.0
+Homo sapiens,Murid betaherpesvirus 2,37.80494968219338,1.0
+Homo sapiens,Pongine gammaherpesvirus 2,38.015784164587956,1.0
+Homo sapiens,Isla Vista hantavirus,38.149367664048356,1.0
+Homo sapiens,Warrego virus,38.22290590861402,1.0
+Homo sapiens,Wallal virus,38.22290590861407,1.0
+Homo sapiens,Phocine morbillivirus,38.31187720127828,1.0
+Homo sapiens,Ife virus,38.59769407779739,1.0
+Homo sapiens,Mobala mammarenavirus,39.83736860828913,1.0
+Homo sapiens,Baboon orthoreovirus,40.122213950848014,1.0
+Homo sapiens,Orthohepevirus C,41.76171227172112,1.0
+Homo sapiens,Pirital mammarenavirus,42.41615547856057,1.0
+Homo sapiens,Nariva narmovirus,42.696713522065615,1.0
+Homo sapiens,Ectromelia virus,42.70926674409214,1.0
+Homo sapiens,Macropodid alphaherpesvirus 2,43.42886878681975,1.0
+Homo sapiens,Bat hepatitis virus,43.91834922267283,1.0
+Homo sapiens,Vesicular stomatitis virus,45.015580637574395,1.0
+Homo sapiens,Macaque simian foamy virus,45.4398937220674,1.0
+Homo sapiens,Sapelovirus B,46.08553210066325,1.0
+Homo sapiens,Macacine betaherpesvirus 3,46.085532100663535,1.0
+Homo sapiens,Macropodid alphaherpesvirus 1,46.859083476668964,1.0
+Homo sapiens,Orthohepevirus D,48.082889515460636,1.0
+Homo sapiens,Murine mastadenovirus C,48.10497912410696,1.0
+Homo sapiens,Chiropteran dependoparvovirus 1,48.30032211699498,1.0
+Homo sapiens,Deltapapillomavirus 4,48.82149734925968,1.0
+Homo sapiens,Khabarovsk orthohantavirus,50.598622680929296,1.0
+Homo sapiens,Alphapapillomavirus 12,50.82442126502169,1.0
+Homo sapiens,Bat mastadenovirus B,51.77771413466726,1.0
+Homo sapiens,Cano Delgadito orthohantavirus,52.15769389548102,1.0
+Homo sapiens,Fort Morgan virus,52.85427293495442,1.0
+Homo sapiens,Bovine alphaherpesvirus 5,53.977698774522,1.0
+Homo sapiens,Turlock orthobunyavirus,54.552768876864256,1.0
+Homo sapiens,Cupixi mammarenavirus,55.2488777180344,1.0
+Homo sapiens,Volepox virus,59.75681402805545,1.0
+Homo sapiens,Mamastrovirus 11,60.211496207655905,1.0
+Homo sapiens,Rabbit hemorrhagic disease virus,62.02439735353685,1.0
+Homo sapiens,Alcelaphine gammaherpesvirus 1,65.90316689140123,1.0
+Homo sapiens,Salem salemvirus,70.40645645247183,1.0
+Homo sapiens,Equine mastadenovirus A,70.4144323494187,1.0
+Homo sapiens,Dyoiotapapillomavirus 2,70.41588574386346,1.0
+Homo sapiens,Equine mastadenovirus B,70.41588574386346,1.0
+Homo sapiens,Erbovirus A,70.41588574386354,1.0
+Homo sapiens,Equine foamy virus,70.41588574386361,1.0
+Homo sapiens,Dyoiotapapillomavirus 1,70.41588574386364,1.0
+Homo sapiens,Dyorhopapillomavirus 1,70.41588574386367,1.0
+Homo sapiens,Peruvian horse sickness virus,70.4158857438637,1.0
+Homo sapiens,Equid alphaherpesvirus 3,70.41588574386381,1.0
+Homo sapiens,Zetapapillomavirus 1,70.41588574386387,1.0
+Homo sapiens,Capim orthobunyavirus,70.51582668312204,1.0
+Homo sapiens,Tibrogargan tibrovirus,73.40988939780436,1.0
+Homo sapiens,Oliveros mammarenavirus,74.83849408925067,1.0
+Homo sapiens,El Moro Canyon orthohantavirus,75.71522290037713,1.0
+Homo sapiens,Main Drain orthobunyavirus,77.44260862708873,1.0
+Homo sapiens,Phocid gammaherpesvirus 2,80.18394649182812,1.0
+Homo sapiens,Mopeia mammarenavirus,81.00529209287099,1.0
+Homo sapiens,Guajara orthobunyavirus,81.3632073968388,1.0
+Homo sapiens,Qalyub orthonairovirus,82.90599827806038,1.0
+Homo sapiens,Human T-lymphotropic virus 4,86.73209065213587,1.0
+Homo sapiens,Gorilline gammaherpesvirus 1,86.73209065213595,1.0
+Homo sapiens,Middelburg virus,90.69183141115693,1.0
+Homo sapiens,Cocal vesiculovirus,95.56983677688693,1.0
+Homo sapiens,Bovine alphaherpesvirus 1,101.02768082686292,1.0
+Homo sapiens,Cabassou virus,104.105513373063,1.0
+Homo sapiens,Equine torovirus,107.90440471952974,1.0
+Homo sapiens,Serra do Navio mammarenavirus,114.34883901743856,1.0
+Homo sapiens,Bluetongue virus,127.14519229822216,1.0
+Homo sapiens,Enterovirus J,138.73508054756473,1.0
+Homo sapiens,Murid gammaherpesvirus 4,146.263403609389,1.0
+Homo sapiens,Ovine gammaherpesvirus 2,156.64832676380493,1.0
+Homo sapiens,Issyk-Kul virus,169.49590448138937,1.0
+Homo sapiens,Torque teno virus 2,182.42105661644968,1.0
+Homo sapiens,Torque teno virus 23,187.39407212516087,1.0
+Homo sapiens,Panine betaherpesvirus 2,187.39407212516096,1.0
+Homo sapiens,Torque teno virus 4,187.39407212516124,1.0
+Homo sapiens,Torque teno virus 14,187.3940721251613,1.0
+Homo sapiens,Carnivore protoparvovirus 1,191.25577033134087,1.0
+Homo sapiens,Phocid alphaherpesvirus 1,191.46527304731848,1.0
+Homo sapiens,Panine gammaherpesvirus 1,201.97151365046355,1.0
+Homo sapiens,Simian mastadenovirus A,242.85976743621532,1.0
+Homo sapiens,Canine mastadenovirus A,275.6808326470782,1.0

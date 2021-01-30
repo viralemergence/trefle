@@ -130,6 +130,13 @@ Assuming a cost of $0.051 per hour (equivalent to what a commercial cloud
 computing provider would charge), the entire `trefle` production process costs
 about $3200.
 
+Dealing with the `artifacts/tuning.csv` and `artifacts/predictions.csv` is
+*considerably* less demanding. The project comes bundled with a `Project.toml`
+which specifies the dependencies, and the compatible major/minor releases of the
+packages. The `hpc/inputs` folder also comes with its `Manifest.toml` file, to
+ensure that we would get the same environment should we decide to run the code
+again (but see the previous paragraph for why this is unlikely). 
+
 ## How to use `trefle`
 
 🧑‍⚖️ Let's talk about licensing, said no one ever. The `trefle` repo is a
@@ -170,6 +177,8 @@ Contact: `timothee.poisot@umontreal.🇨🇦`
 - `imputation` has the files to read the data from `hpc/outputs` and do the analyses
 - `artifacts` has derived data tables
     - `modelselection.csv` is the list of all models considered during hyper-parameters tuning
+    - `imputed_associations.csv` is the list of all suspected positive associations (~ 6MB) - associations are ranked from least to most likely
+    - `zoonoses.csv` is the list of the subset of suspected positive associations involving *H. sapiens* - associations are ranked from least to most likely
     - `phylo_distance_to_human.csv` is the phylogenetic distance between *H. sapiens* and other taxa in the Upham tree
 - `R` has `.r` files to read the phylogeny
 
