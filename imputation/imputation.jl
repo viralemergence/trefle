@@ -47,6 +47,13 @@ for r in eachrow(imputed)
     imputed_clover[r.virus, r.host] = true
 end
 
+d = DataFrame(virus = String[], host = String[])
+for int in interactions(imputed_clover)
+    push!(d, (int.from, int.to))
+end
+sort!(d, :virus)
+CSV.write("artifacts/trefle.csv", d)
+
 # ROC AUC analysis on the full dataset
 S = LinRange(0.0, 1.0, 1000)
 TP = zeros(Int64, length(S))

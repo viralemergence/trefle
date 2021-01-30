@@ -179,6 +179,7 @@ Contact: `timothee.poisot@umontreal.🇨🇦`
     - `modelselection.csv` is the list of all models considered during hyper-parameters tuning
     - `imputed_associations.csv` is the list of all suspected positive associations (~ 6MB) - associations are ranked from least to most likely
     - `zoonoses.csv` is the list of the subset of suspected positive associations involving *H. sapiens* - associations are ranked from least to most likely
+    - `trefle.csv` is the edgelist of `clover` plus the imputed associations, sorted by virus name (~ 3MB)
     - `phylo_distance_to_human.csv` is the phylogenetic distance between *H. sapiens* and other taxa in the Upham tree
 - `R` has `.r` files to read the phylogeny
 
