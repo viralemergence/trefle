@@ -157,6 +157,8 @@ Contact: `timothee.poisot@umontreal.🇨🇦`
 - `imputation` has the files to read the data from `hpc/outputs` and do the analyses
 - `artifacts` has derived data tables
     - `modelselection.csv` is the list of all models considered during hyper-parameters tuning
+    - `phylo_distance_to_human.csv` is the phylogenetic distance between *H. sapiens* and other taxa in the Upham tree
+- `R` has `.r` files to read the phylogeny
 
 [almost_surely]: https://en.wikipedia.org/wiki/Almost_surely
 ## Main results
