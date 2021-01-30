@@ -186,6 +186,7 @@ Contact: `timothee.poisot@umontreal.🇨🇦`
 [almost_surely]: https://en.wikipedia.org/wiki/Almost_surely
 ## Main results
 
+This section will grow as we develop more analyses.
 ### Imputation changes the network
 
 The LF-SVD approach suggested 75901 new interactions, from the original 5494 in
@@ -199,4 +200,19 @@ The following figure is the result of a 2-dimensional tSNE embedding of `clover`
 
 Not only can we see an increase in the degree of most nodes, we can also see the
 shape of the network change, with less clusters of mostly homogenous species.
+
+### Imputation removes the livestock bias
+
+The original data that went into `clover` had a lot of information about
+livestock viruses. In the following figure, we show the ten species most similar
+(using Additive Jaccard Similarity) to *H. sapiens* before and after imputation:
+
+![similarity to human](figures/human-similarity.png)
+
+Strikingly, if not unexpectingly, the hosts with viral associations most similar
+to human after imputation are mostly primates (chimpanzees and both gorilla
+species). Some rodents are also joining the top 10. This result suggests that
+the LF-SVD approach is able to somewhat overcome the initial data bias.
+
+### Phylogenetic distance as a predictor of viral sharing
 ## Get involved

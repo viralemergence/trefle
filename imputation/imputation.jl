@@ -137,7 +137,7 @@ top_10_imputed = @linq overlap_results |>
     orderby(:score)
 top_10_imputed = last(top_10_imputed, 10)
 
-plot(grid=false, xticks=((1,2),["Initial", "Imputed"]), legend=false)
+plot(grid=false, xticks=((1,2),["Initial", "Imputed"]), legend=false, dpi=300)
 raw_order = LinRange(minimum(top_10_initial.score)-0.02, maximum(top_10_initial.score)+0.02, 10)
 for (i,r) in enumerate(raw_order)
     plot!([0.88, 1.0], [raw_order[i], top_10_initial.score[i]], lab="", c=:darkgrey)
@@ -159,36 +159,8 @@ end
 @df top_10_imputed scatter!(fill(2, 10), :score, c=:black, msw=0.0)
 xaxis!((-0.1,3.1), false)
 yaxis!((0.0,0.75), "Similarity")
-savefig("mainfigs/similarity.png")
+savefig("figures/human-similarity.png")
 
-# Eigenvector
-include("lib/leadingeigenvector.jl")
-using LinearAlgebra
-
-mcl = leadingeigenvector(UCLOV)
-scatter(IO, clover, bipartite=true, nodesize=degree(clover), nodefill=mcl[2], msc=:grey, aspectratio=1, c=:isolum)
-savefig("mainfigs/tsne-original-modules.png")
-
-mim = leadingeigenvector(UIMPT)
-scatter(IM, imputed_clover, bipartite=true, nodesize=degree(imputed_clover), nodefill=mim[2], msc=:grey, aspectratio=1, c=:isolum)
-savefig("mainfigs/tsne-imputed-modules.png")
-
-# Adjacency matrices
-A = Array(clover.edges)
-rh = sortperm(vec(sum(A; dims=1)))
-rv = sortperm(vec(sum(A; dims=2)))
-heatmap(A[rv,rh], c=:Greys, aspectratio=1, legend=false)
-xaxis!("Hosts", (1, richness(clover; dims=2)), false)
-yaxis!("Viruses", (1, richness(clover; dims=1)), false)
-savefig("mainfigs/adjacency-original.png")
-
-B = Array(imputed_clover.edges)
-rh = sortperm(vec(sum(B; dims=1)))
-rv = sortperm(vec(sum(B; dims=2)))
-heatmap(B[rv,rh], c=:Greys, aspectratio=1, legend=false)
-xaxis!("Hosts", (1, richness(clover; dims=2)), false)
-yaxis!("Viruses", (1, richness(clover; dims=1)), false)
-savefig("mainfigs/adjacency-imputed.png")
 
 # Co-occurrences in datasets
 imputed.cooc = fill(false, size(imputed, 1))
@@ -200,7 +172,7 @@ for i in 1:size(imputed, 1)
     imputed.cooc[i] = length(dbvirus ∩ dbhost) > 0
 end
 
-@df imputed violin(:cooc, :P, group=:cooc)
+@df imputed dotplot(:cooc, :P, group=:cooc)
 
 # Phylogeny - rank correlation
 phylodist = DataFrame(CSV.File("data/human_distances.csv"))
