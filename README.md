@@ -132,12 +132,23 @@ about $3200.
 
 ## How to use `trefle`
 
-⚠️ `trefle` should not be incorporated into your own databases. The associations
-are predictions, and we can estimate how many of them are false positives, and
-how many are missing. In addition, the probability score is not a biologically
-meaningful probability. Unless your database is able to accomodate these
-subtlelties and convey them clearly to the user, we advise you against consuming
-`trefle`. ⚠️
+🧑‍⚖️ Let's talk about licensing, said no one ever. The `trefle` repo is a
+complex beast with data from other projects, code to work on it, and *de novo*
+data derived from both of these things. As a result, intellectual property and
+use rights are applied *within each top-level folder*. A folder that has *no
+`LICENSE` file in it* is understood to contain information that should not be
+re-used or re-distributed. This is notably the case for `data/`, which contains
+information from other projects. Note that the repo has a `LICENSE` file at its
+root, which cover this `README`, and *all images present within this project*.
+All derived data (in `artifacts`) are released under the CC0 waiver and are
+usable without condition or restriction.
+
+⚠️ `trefle` should most likely not be incorporated into your own databases. The
+associations are predictions, and we can estimate how many of them are false
+positives, and how many are missing. In addition, the probability score is not a
+biologically meaningful probability. Unless your database is able to accomodate
+these subtlelties and convey them clearly to the user, we advise you against
+consuming `trefle`.
 
 Contact: `timothee.poisot@umontreal.🇨🇦`
 
