@@ -144,9 +144,14 @@ again (but see the previous paragraph for why this is unlikely).
 
 ## How to use `trefle`
 
+The output of running the pipeline is a *prediction* (specifically based on a binary
+classifier) for host-virus associations that are likely to exist given what we know
+about true positives (*i.e.* the content of `clover`). These recommended interactions are
+*not* actual observations, and should not be treated as such.
+
 🧑‍⚖️ Let's talk about licensing, said no one ever. The `trefle` repo is a
-complex beast with data from other projects, code to work on it, and *de novo*
-data derived from both of these things. As a result, intellectual property and
+complex beast with data from other projects, code to work on it, and derived data products
+from both of these things. As a result, intellectual property and
 use rights are applied *within each top-level folder*. A folder that has *no
 `LICENSE` file in it* is understood to contain information that should not be
 re-used or re-distributed. This is notably the case for `data/`, which contains
