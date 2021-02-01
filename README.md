@@ -1,4 +1,4 @@
-# A data-inflated host-virus association database
+# A model-inflated host-virus association database
 
 C'est quoi, `trefle`?
 
