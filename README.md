@@ -208,6 +208,20 @@ The following figure is the result of a 2-dimensional tSNE embedding of `clover`
 Not only can we see an increase in the degree of most nodes, we can also see the
 shape of the network change, with less clusters of mostly homogenous species.
 
+### Top 10 predicted *H. sapiens* viruses
+
+| Host         | Virus                       | Evidence |
+|--------------|-----------------------------|----------|
+| Homo sapiens | **Torque teno virus 2**     | 182.4210 |
+| Homo sapiens | **Torque teno virus 23**    | 187.3940 |
+| Homo sapiens | Panine betaherpesvirus 2    | 187.3940 |
+| Homo sapiens | **Torque teno virus 4**     | 187.3940 |
+| Homo sapiens | **Torque teno virus 14**    | 187.3940 |
+| Homo sapiens | Carnivore protoparvovirus 1 | 191.2557 |
+| Homo sapiens | Phocid alphaherpesvirus 1   | 191.4652 |
+| Homo sapiens | Panine gammaherpesvirus 1   | 201.9715 |
+| Homo sapiens | Simian mastadenovirus A     | 242.8597 |
+| Homo sapiens | Canine mastadenovirus A     | 275.6808 |
 ### Imputation removes the livestock bias
 
 The original data that went into `clover` had a lot of information about
