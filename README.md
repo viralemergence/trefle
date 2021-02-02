@@ -195,9 +195,11 @@ Contact: `timothee.poisot@umontreal.🇨🇦`
 - `R` has `.r` files to read the phylogeny
 
 [almost_surely]: https://en.wikipedia.org/wiki/Almost_surely
+
 ## Main results
 
 This section will grow as we develop more analyses.
+
 ### Imputation changes the network
 
 The LF-SVD approach suggested 75901 new interactions, from the original 5494 in
