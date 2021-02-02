@@ -236,7 +236,7 @@ livestock viruses. In the following figure, we show the ten species most similar
 
 ![similarity to human](figures/human-similarity.png)
 
-Strikingly, if not unexpectingly, the hosts with viral associations most similar
+Strikingly, if not unexpectedly, the hosts with viral associations most similar
 to human after imputation are mostly primates (chimpanzees and both gorilla
 species). Some rodents are also joining the top 10. This result suggests that
 the LF-SVD approach is able to somewhat overcome the initial data bias.
