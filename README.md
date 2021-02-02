@@ -227,6 +227,7 @@ shape of the network change, with less clusters of mostly homogenous species.
 | Homo sapiens | Panine gammaherpesvirus 1   | 201.9715 |
 | Homo sapiens | Simian mastadenovirus A     | 242.8597 |
 | Homo sapiens | Canine mastadenovirus A     | 275.6808 |
+
 ### Imputation removes the livestock bias
 
 The original data that went into `clover` had a lot of information about
