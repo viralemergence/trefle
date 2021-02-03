@@ -267,12 +267,6 @@ There are two main results:
 1. The missing links recommended by SVD have a strong phylogenetic signal even though it's trait agnostic, implying the signal in the network is strong enough to be propagated by latent factor approaches. (SVD is good)
 2. The less sparse the matrix becomes, the more we will need to move from thinking about sharing networks as binary networks to weighted ones, which is a bit of a change from the last 20 years of sharing work like the GMPD-based work (count data matters)
 
-### Phylogenetic distance as a predictor of viral sharing
-
-**Analysis in development**: @cjcarlson and @danieljbecker and @gfalbery
-
-See `artifacts/sharing-phylogeny.csv`
-
 ### Spatial analysis of hotspots of viral diversity
 
 **Analysis in development**: @tpoisot - comparison of pre and post-imputation LCBD
