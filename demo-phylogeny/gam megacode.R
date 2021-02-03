@@ -128,4 +128,4 @@ all.data %>%
               method.args = list(family = binomial(link = 'logit'))) + 
   theme_bw() -> bottom.left
 
-(upper.left + upper.right) / (bottom.left + bottom.right)
+(upper.left + upper.right) / (bottom.left + bottom.right) + plot_layout(guides = 'collect') 
