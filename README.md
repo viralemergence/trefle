@@ -261,7 +261,7 @@ final amount of overlap is rather large anyways.
 
 The below figure shows pre- and post-imputation host sharing networks analyzed as a function of phylogenetic distance between hosts, pairwise across the entire network (top) and hostwise with humans (bottom), using either binary sharing of at least one virus (sharing) or total number of viruses shared (counts).
 
-![phylogenetic effect](demo-phylogeny/PhylogenyGAMs.jpg)
+![phylogenetic effect](demo-phylogeny/PhylogenyGAMs.png)
 
 There are two main results:
 1. The missing links recommended by SVD have a strong phylogenetic signal even though it's trait agnostic, implying the signal in the network is strong enough to be propagated by latent factor approaches. (SVD is good)
