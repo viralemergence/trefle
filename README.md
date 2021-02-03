@@ -262,6 +262,10 @@ final amount of overlap is rather large anyways.
 
 See `artifacts/sharing-phylogeny.csv`
 
+### Spatial analysis of hotspots of viral diversity
+
+**Analysis in development**: @tpoisot - comparison of pre and post-imputation LCBD
+
 ## Get involved
 
 If  you want to develop an analysis, **please open an issue** (and if you want to
