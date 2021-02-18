@@ -1,0 +1,219 @@
+virus,evidence,P,paths,residuals,VirusClass,VirusOrder,VirusFamily,VirusGenus
+Jaagsiekte sheep retrovirus,3.462647438330449,0.9696060841499099,160,3.8971473804978354,Revtraviricetes,Ortervirales,Retroviridae,Betaretrovirus
+Pipapillomavirus 2,1.8465356819373602,0.8637198390373215,88,3.8956319510284194,Papovaviricetes,Zurhausenvirales,Papillomaviridae,Pipapillomavirus
+Equine infectious anemia virus,4.76082674124965,0.9915140960884589,126,3.3562754040898057,Revtraviricetes,Ortervirales,Retroviridae,Lentivirus
+African horse sickness virus,14.849168191789847,0.9999996442965815,263,3.0132461629701726,Resentoviricetes,Reovirales,Reoviridae,Orbivirus
+Phipapillomavirus 1,2.2924461903714257,0.9082495005242104,41,2.9267062664408083,Papovaviricetes,Zurhausenvirales,Papillomaviridae,Phipapillomavirus
+Small ruminant morbillivirus,16.076427620427832,0.9999998957451781,220,2.759401781438604,Monjiviricetes,Mononegavirales,Paramyxoviridae,Morbillivirus
+Ovine mastadenovirus A,10.37706005877812,0.9999688622982155,123,2.5931556953549584,Tectiliviricetes,Rowavirales,Adenoviridae,Mastadenovirus
+Suid gammaherpesvirus 3,6.203247793525273,0.9979812335056993,65,2.4433676850611254,Herviviricetes,Herpesvirales,Herpesviridae,Macavirus
+Murine respirovirus,22.439738042938426,0.9999999998203011,215,2.420118473849707,Monjiviricetes,Mononegavirales,Paramyxoviridae,Respirovirus
+Wad Medani virus,35.5912986756591,0.9999999999999996,323,2.389635985270211,Resentoviricetes,Reovirales,Reoviridae,Orbivirus
+Bovine gammaherpesvirus 6,11.410511331910811,0.999988921701022,102,2.3158992897948143,Herviviricetes,Herpesvirales,Herpesviridae,Macavirus
+Royal Farm virus,14.763073639192797,0.999999612315521,127,2.290794367501311,Flasuviricetes,Amarillovirales,Flaviviridae,Flavivirus
+Bovine mastadenovirus B,9.8853687883054,0.9999490883968777,85,2.2696628810960626,Tectiliviricetes,Rowavirales,Adenoviridae,Mastadenovirus
+Epizootic hemorrhagic disease virus,35.40451782115397,0.9999999999999996,258,2.169933842121961,Resentoviricetes,Reovirales,Reoviridae,Orbivirus
+Ngaingan hapavirus,14.696743683997026,0.9999995857284243,102,2.075851119459976,Monjiviricetes,Mononegavirales,Rhabdoviridae,Hapavirus
+Alphaarterivirus equid,15.005596293823032,0.9999996958049099,87,1.8970609256368514,Pisoniviricetes,Nidovirales,Arteriviridae,Alphaarterivirus
+Deltapapillomavirus 4,48.82149734925968,1.0,252,1.8416315476673528,Papovaviricetes,Zurhausenvirales,Papillomaviridae,Deltapapillomavirus
+Ife virus,38.59769407779739,1.0,197,1.8182750095239832,Resentoviricetes,Reovirales,Reoviridae,Orbivirus
+Murid betaherpesvirus 1,17.190667214219904,0.999999965787243,91,1.8130746136510956,Herviviricetes,Herpesvirales,Herpesviridae,Muromegalovirus
+Witwatersrand orthobunyavirus,4.444214687953413,0.9883900473576438,24,1.7633190069710218,Ellioviricetes,Bunyavirales,Peribunyaviridae,Orthobunyavirus
+Vesicular stomatitis virus,45.015580637574395,1.0,206,1.7170580876789292,Monjiviricetes,Mononegavirales,Rhabdoviridae,Vesiculovirus
+Bovine alphaherpesvirus 1,101.02768082686292,1.0,438,1.7046743491681484,Herviviricetes,Herpesvirales,Herpesviridae,Varicellovirus
+Bluetongue virus,127.14519229822216,1.0,523,1.6639512591035412,Resentoviricetes,Reovirales,Reoviridae,Orbivirus
+Main Drain orthobunyavirus,77.44260862708873,1.0,320,1.6429331430669079,Ellioviricetes,Bunyavirales,Peribunyaviridae,Orthobunyavirus
+Ovine atadenovirus D,19.928895494584932,0.9999999977869529,86,1.61637526594982,Tectiliviricetes,Rowavirales,Adenoviridae,Atadenovirus
+Caprine arthritis encephalitis virus,21.11717118602972,0.9999999993255821,86,1.5614441052889965,Revtraviricetes,Ortervirales,Retroviridae,Lentivirus
+Sheeppox virus,21.1171711860299,0.9999999993255821,86,1.561444105288988,Pokkesviricetes,Chitovirales,Poxviridae,Capripoxvirus
+Goatpox virus,21.117171186030077,0.9999999993255821,86,1.56144410528898,Pokkesviricetes,Chitovirales,Poxviridae,Capripoxvirus
+Alcelaphine gammaherpesvirus 1,65.90316689140123,1.0,249,1.5451006235950309,Herviviricetes,Herpesvirales,Herpesviridae,Macavirus
+Canid alphaherpesvirus 1,27.16765935644081,0.9999999999984106,106,1.5315786698103806,Herviviricetes,Herpesvirales,Herpesviridae,Varicellovirus
+Simian virus 12,12.351163524527454,0.9999956753002816,44,1.3999831016444473,Papovaviricetes,Sepolyvirales,Polyomaviridae,
+Equine torovirus,107.90440471952974,1.0,332,1.3651328373900045,Pisoniviricetes,Nidovirales,Tobaniviridae,Torovirus
+Papio hamadryas adenovirus 1,2.980876911676355,0.9517026942106813,11,1.3619641452583127,Tectiliviricetes,Rowavirales,Adenoviridae,Mastadenovirus
+Visna-maedi virus,34.78759376901287,0.9999999999999991,108,1.3157781989563198,Revtraviricetes,Ortervirales,Retroviridae,Lentivirus
+Minatitlan orthobunyavirus,13.687825863404317,0.9999988638065931,44,1.3025220192535922,Ellioviricetes,Bunyavirales,Peribunyaviridae,Orthobunyavirus
+Mule deerpox virus,7.245833644078207,0.9992873688049123,23,1.257126992492967,Pokkesviricetes,Chitovirales,Poxviridae,Cervidpoxvirus
+Ovine gammaherpesvirus 2,156.64832676380493,1.0,421,1.2490827718234225,Herviviricetes,Herpesvirales,Herpesviridae,Macavirus
+Saboya virus,19.270238225188397,0.9999999957239589,56,1.2192565278370058,Flasuviricetes,Amarillovirales,Flaviviridae,Flavivirus
+Chiropteran tetraparvovirus 1,3.037709447514189,0.9542489324716971,9,1.1433804968337669,Quintoviricetes,Piccovirales,Parvoviridae,Tetraparvovirus
+Kirsten murine sarcoma virus,8.549358303153411,0.9998063681638539,24,1.1427822703497403,Revtraviricetes,Ortervirales,Retroviridae,Gammaretrovirus
+Barur ledantevirus,8.549358303153443,0.9998063681638542,24,1.1427822703497368,Monjiviricetes,Mononegavirales,Rhabdoviridae,Ledantevirus
+Harvey murine sarcoma virus,8.549358303153502,0.9998063681638542,24,1.1427822703497301,Revtraviricetes,Ortervirales,Retroviridae,Gammaretrovirus
+Bovine alphaherpesvirus 5,53.977698774522,1.0,137,1.136957176961273,Herviviricetes,Herpesvirales,Herpesviridae,Varicellovirus
+Deltapapillomavirus 2,8.616663027194408,0.9998189693265093,23,1.092785106514592,Papovaviricetes,Zurhausenvirales,Papillomaviridae,Deltapapillomavirus
+Feline foamy virus,9.50325420853579,0.9999253969237042,25,1.0832773766555728,Revtraviricetes,Ortervirales,Retroviridae,Felispumavirus
+Ungulate tetraparvovirus 4,18.062645326069116,0.9999999856948374,45,1.0619480909779702,Quintoviricetes,Piccovirales,Parvoviridae,Tetraparvovirus
+Deltapapillomavirus 3,18.063966283768966,0.9999999857137214,45,1.0618787302856219,Papovaviricetes,Zurhausenvirales,Papillomaviridae,Deltapapillomavirus
+Ovine mastadenovirus B,18.063966283769012,0.9999999857137214,45,1.0618787302856196,Tectiliviricetes,Rowavirales,Adenoviridae,Mastadenovirus
+Dyokappapapillomavirus 1,18.063966283769048,0.9999999857137214,45,1.0618787302856179,Papovaviricetes,Zurhausenvirales,Papillomaviridae,Dyokappapapillomavirus
+Bukalasa bat virus,3.0217392661354383,0.9535466278743213,8,1.030596994632862,Flasuviricetes,Amarillovirales,Flaviviridae,Flavivirus
+Bat mastadenovirus A,12.4179365860419,0.9999959546425031,30,1.011877048064596,Tectiliviricetes,Rowavirales,Adenoviridae,Mastadenovirus
+Phocine morbillivirus,38.31187720127828,1.0,87,1.0080289465390697,Monjiviricetes,Mononegavirales,Paramyxoviridae,Morbillivirus
+Canine parainfluenza virus,25.8615618258156,0.9999999999941322,59,0.9924074670434888,Monjiviricetes,Mononegavirales,Paramyxoviridae,
+Tibrogargan tibrovirus,73.40988939780436,1.0,157,0.9815804590984518,Monjiviricetes,Mononegavirales,Rhabdoviridae,Tibrovirus
+Macacine gammaherpesvirus 4,16.029131256064236,0.9999998906958383,37,0.979486618535637,Herviviricetes,Herpesvirales,Herpesviridae,Lymphocryptovirus
+Primate erythroparvovirus 3,16.02913125606428,0.9999998906958383,37,0.9794866185356343,Quintoviricetes,Piccovirales,Parvoviridae,Erythroparvovirus
+Deer atadenovirus A,19.69785028137906,0.9999999972117461,44,0.9572778608219323,Tectiliviricetes,Rowavirales,Adenoviridae,Atadenovirus
+Sakobuvirus A,11.45798021573519,0.9999894352839159,26,0.9450854846399461,Pisoniviricetes,Picornavirales,Picornaviridae,Sakobuvirus
+Murid betaherpesvirus 2,37.80494968219338,1.0,80,0.9367809528908331,Herviviricetes,Herpesvirales,Herpesviridae,Muromegalovirus
+Equid alphaherpesvirus 8,37.7888572868131,1.0,77,0.8989635585809532,Herviviricetes,Herpesvirales,Herpesviridae,Varicellovirus
+Papiine alphaherpesvirus 2,20.557749404969876,0.9999999988199977,43,0.8937618506122882,Herviviricetes,Herpesvirales,Herpesviridae,Simplexvirus
+Ectromelia virus,42.70926674409214,1.0,84,0.8698811499732244,Pokkesviricetes,Chitovirales,Poxviridae,Orthopoxvirus
+Parapoxvirus of red deer in New Zealand,9.988124003054965,0.9999540597971106,21,0.8617259534451072,Pokkesviricetes,Chitovirales,Poxviridae,Parapoxvirus
+Equid alphaherpesvirus 4,34.280808035515165,0.9999999999999987,66,0.8372206007776213,Herviviricetes,Herpesvirales,Herpesviridae,Varicellovirus
+Carnivore protoparvovirus 1,191.25577033134087,1.0,328,0.8101418636355335,Quintoviricetes,Piccovirales,Parvoviridae,Protoparvovirus
+Langur virus,4.972405306243513,0.9931211782307212,10,0.7813370620601039,Revtraviricetes,Ortervirales,Retroviridae,Betaretrovirus
+Acara orthobunyavirus,30.591910274534417,0.9999999999999483,53,0.7258406784431437,Ellioviricetes,Bunyavirales,Peribunyaviridae,Orthobunyavirus
+Benevides orthobunyavirus,30.59191027453747,0.9999999999999483,53,0.7258406784430496,Ellioviricetes,Bunyavirales,Peribunyaviridae,Orthobunyavirus
+Torque teno felis virus 2,13.448346358649378,0.9999985563671405,24,0.7131272689498278,,,Anelloviridae,Etatorquevirus
+Carnivore bocaparvovirus 3,13.448346358649449,0.9999985563671405,24,0.7131272689498225,Quintoviricetes,Piccovirales,Parvoviridae,Bocaparvovirus
+Dyothetapapillomavirus 1,13.448346358649452,0.9999985563671405,24,0.713127268949822,Papovaviricetes,Zurhausenvirales,Papillomaviridae,Dyothetapapillomavirus
+Orthohepevirus C,41.76171227172112,1.0,69,0.6944506102615087,Alsuviricetes,Hepelivirales,Hepeviridae,Orthohepevirus
+Saimiriine betaherpesvirus 4,4.505057222708088,0.9890678746305631,8,0.6518100352973437,Herviviricetes,Herpesvirales,Herpesviridae,Cytomegalovirus
+Dyoomikronpapillomavirus 1,4.505057222708098,0.9890678746305631,8,0.6518100352973415,Papovaviricetes,Zurhausenvirales,Papillomaviridae,Dyoomikronpapillomavirus
+Squirrel monkey retrovirus,4.505057222708101,0.9890678746305633,8,0.6518100352973408,Revtraviricetes,Ortervirales,Retroviridae,Betaretrovirus
+Macaque simian foamy virus,45.4398937220674,1.0,71,0.6429635072122188,Revtraviricetes,Ortervirales,Retroviridae,Spumavirus
+Alphapapillomavirus 12,50.82442126502169,1.0,78,0.630777039875789,Papovaviricetes,Zurhausenvirales,Papillomaviridae,Alphapapillomavirus
+Cowbone Ridge virus,16.35877507368384,0.9999999213906472,26,0.6073576215298178,Flasuviricetes,Amarillovirales,Flaviviridae,Flavivirus
+Phnom Penh bat virus,4.1122769460599775,0.9838932179796802,7,0.6048012313079798,Flasuviricetes,Amarillovirales,Flaviviridae,Flavivirus
+Sapelovirus B,46.08553210066325,1.0,67,0.5715946964329452,Pisoniviricetes,Picornavirales,Picornaviridae,Sapelovirus
+Macacine betaherpesvirus 3,46.085532100663535,1.0,67,0.5715946964329399,Herviviricetes,Herpesvirales,Herpesviridae,Cytomegalovirus
+Turlock orthobunyavirus,54.552768876864256,1.0,73,0.49738433019194117,Ellioviricetes,Bunyavirales,Peribunyaviridae,Orthobunyavirus
+Baboon orthoreovirus,40.122213950848014,1.0,52,0.449573696327632,Resentoviricetes,Reovirales,Reoviridae,Orthoreovirus
+Oita ledantevirus,3.467451686078305,0.9697473469597832,5,0.43009644135027836,Monjiviricetes,Mononegavirales,Rhabdoviridae,Ledantevirus
+Shimoni bat lyssavirus,11.878915073717168,0.9999930649480191,16,0.42535840537344827,Monjiviricetes,Mononegavirales,Rhabdoviridae,Lyssavirus
+Middelburg virus,90.69183141115693,1.0,108,0.40695199248755465,Alsuviricetes,Martellivirales,Togaviridae,Alphavirus
+Khujand lyssavirus,4.484822245162254,0.988846902365917,6,0.36839770186209075,Monjiviricetes,Mononegavirales,Rhabdoviridae,Lyssavirus
+Deltapapillomavirus 6,14.45774783905502,0.9999994738862353,18,0.3568006352852855,Papovaviricetes,Zurhausenvirales,Papillomaviridae,Deltapapillomavirus
+Qalyub orthonairovirus,82.90599827806038,1.0,92,0.3317435285543233,Ellioviricetes,Bunyavirales,Nairoviridae,Orthonairovirus
+African green monkey simian foamy virus,17.837584502798855,0.9999999820842304,21,0.31170018137554933,Revtraviricetes,Ortervirales,Retroviridae,Spumavirus
+Bubaline alphaherpesvirus 1,17.144875212991334,0.9999999641841482,20,0.3004772477883537,Herviviricetes,Herpesvirales,Herpesviridae,Varicellovirus
+Ateline gammaherpesvirus 3,18.372398502632734,0.9999999895053319,21,0.28368084996905374,Herviviricetes,Herpesvirales,Herpesviridae,Rhadinovirus
+Betapapillomavirus 6,28.37512113739413,0.9999999999995248,30,0.22809246671986028,Papovaviricetes,Zurhausenvirales,Papillomaviridae,Betapapillomavirus
+Arumowot phlebovirus,7.074072833130572,0.9991539391312853,8,0.2238282508542222,Ellioviricetes,Bunyavirales,Phenuiviridae,Phlebovirus
+Murid gammaherpesvirus 7,35.622208517184326,0.9999999999999996,37,0.22207822150722967,Herviviricetes,Herpesvirales,Herpesviridae,Rhadinovirus
+Araguari virus,7.491706526864682,0.9994426204110184,8,0.16942403008524365,Insthoviricetes,Articulavirales,Orthomyxoviridae,Thogotovirus
+Carnivore amdoparvovirus 2,9.690452013353244,0.999938132396454,10,0.14848512441320239,Quintoviricetes,Piccovirales,Parvoviridae,Amdoparvovirus
+Guajara orthobunyavirus,81.3632073968388,1.0,75,0.14525927879648215,Ellioviricetes,Bunyavirales,Peribunyaviridae,Orthobunyavirus
+Muleshoe hantavirus,20.46738768943647,0.9999999987084047,20,0.1324721857948714,Ellioviricetes,Bunyavirales,Hantaviridae,Orthohantavirus
+Jutiapa virus,20.46738768943653,0.9999999987084047,20,0.13247218579486875,Flasuviricetes,Amarillovirales,Flaviviridae,Flavivirus
+Salem salemvirus,70.40645645247183,1.0,63,0.10809030217747306,Monjiviricetes,Mononegavirales,Paramyxoviridae,Salemvirus
+Equine mastadenovirus A,70.4144323494187,1.0,63,0.10798286262463463,Tectiliviricetes,Rowavirales,Adenoviridae,Mastadenovirus
+Dyoiotapapillomavirus 2,70.41588574386346,1.0,63,0.10796328594317028,Papovaviricetes,Zurhausenvirales,Papillomaviridae,Dyoiotapapillomavirus
+Equine mastadenovirus B,70.41588574386346,1.0,63,0.10796328594317028,Tectiliviricetes,Rowavirales,Adenoviridae,Mastadenovirus
+Erbovirus A,70.41588574386354,1.0,63,0.1079632859431694,Pisoniviricetes,Picornavirales,Picornaviridae,Erbovirus
+Equine foamy virus,70.41588574386361,1.0,63,0.10796328594316851,Revtraviricetes,Ortervirales,Retroviridae,Equispumavirus
+Dyoiotapapillomavirus 1,70.41588574386364,1.0,63,0.10796328594316762,Papovaviricetes,Zurhausenvirales,Papillomaviridae,Dyoiotapapillomavirus
+Dyorhopapillomavirus 1,70.41588574386367,1.0,63,0.10796328594316762,Papovaviricetes,Zurhausenvirales,Papillomaviridae,Dyorhopapillomavirus
+Peruvian horse sickness virus,70.4158857438637,1.0,63,0.10796328594316673,Resentoviricetes,Reovirales,Reoviridae,Orbivirus
+Equid alphaherpesvirus 3,70.41588574386381,1.0,63,0.10796328594316495,Herviviricetes,Herpesvirales,Herpesviridae,Varicellovirus
+Zetapapillomavirus 1,70.41588574386387,1.0,63,0.10796328594316407,Papovaviricetes,Zurhausenvirales,Papillomaviridae,Zetapapillomavirus
+Capim orthobunyavirus,70.51582668312204,1.0,63,0.10661808702536657,Ellioviricetes,Bunyavirales,Peribunyaviridae,Orthobunyavirus
+San Perlita virus,34.09743703597039,0.9999999999999984,31,0.08664010709187187,Flasuviricetes,Amarillovirales,Flaviviridae,Flavivirus
+Sal Vieja virus,34.097437035970515,0.9999999999999984,31,0.08664010709186831,Flasuviricetes,Amarillovirales,Flaviviridae,Flavivirus
+Enterovirus J,138.73508054756473,1.0,117,0.0838028428837525,Pisoniviricetes,Picornavirales,Picornaviridae,Enterovirus
+Itaporanga phlebovirus,17.74009303227564,0.9999999802496189,16,0.044964532645971556,Ellioviricetes,Bunyavirales,Phenuiviridae,Phlebovirus
+Jurona vesiculovirus,17.740093032275784,0.9999999802496189,16,0.044964532645964006,Monjiviricetes,Mononegavirales,Rhabdoviridae,Vesiculovirus
+Canine mastadenovirus A,275.6808326470782,1.0,212,0.02692488716269903,Tectiliviricetes,Rowavirales,Adenoviridae,Mastadenovirus
+Mamastrovirus 17,23.30032432525196,0.9999999999240028,20,0.009518272181240572,Stelpaviricetes,Stellavirales,Astroviridae,Mamastrovirus
+Rabbit hemorrhagic disease virus,62.02439735353685,1.0,50,-0.0027965721827087897,Pisoniviricetes,Picornavirales,Caliciviridae,Lagovirus
+Cocal vesiculovirus,95.56983677688693,1.0,75,-0.00738121787890389,Monjiviricetes,Mononegavirales,Rhabdoviridae,Vesiculovirus
+Cabassou virus,104.105513373063,1.0,80,-0.023981759146941783,Alsuviricetes,Martellivirales,Togaviridae,Alphavirus
+Murid gammaherpesvirus 4,146.263403609389,1.0,110,-0.028010428013013566,Herviviricetes,Herpesvirales,Herpesviridae,Rhadinovirus
+Chiropteran dependoparvovirus 1,48.30032211699498,1.0,38,-0.040031964040105006,Quintoviricetes,Piccovirales,Parvoviridae,Dependoparvovirus
+Latino mammarenavirus,36.46954391041104,0.9999999999999998,28,-0.07893192782741698,Ellioviricetes,Bunyavirales,Arenaviridae,Mammarenavirus
+Oliveros mammarenavirus,74.83849408925067,1.0,55,-0.08561262809882564,Ellioviricetes,Bunyavirales,Arenaviridae,Mammarenavirus
+Torque teno virus 2,182.42105661644968,1.0,110,-0.23753450622721228,,,Anelloviridae,Alphatorquevirus
+Mink enteric sapovirus,12.454512382900536,0.9999960999308842,8,-0.3126682979182167,Pisoniviricetes,Picornavirales,Caliciviridae,Sapovirus
+Mink calicivirus,12.4545123829006,0.9999960999308842,8,-0.31266829791822115,Pisoniviricetes,Picornavirales,Caliciviridae,Vesivirus
+Cricetid gammaherpesvirus 2,14.270855828453582,0.9999993657714527,9,-0.32400600755865083,Herviviricetes,Herpesvirales,Herpesviridae,Rhadinovirus
+Ground squirrel hepatitis virus,12.747897945621864,0.9999970915807982,8,-0.33475180366190305,Revtraviricetes,Blubervirales,Hepadnaviridae,Orthohepadnavirus
+Mamastrovirus 10,22.849695291438152,0.9999999998807376,13,-0.40274158015711237,Stelpaviricetes,Stellavirales,Astroviridae,Mamastrovirus
+Rhinolophus bat coronavirus HKU2,22.860291510242835,0.9999999998819946,13,-0.40318131569807036,Pisoniviricetes,Nidovirales,Coronaviridae,Alphacoronavirus
+Yogue virus,12.218770144761438,0.9999950631105035,7,-0.4280747986270923,Ellioviricetes,Bunyavirales,Nairoviridae,Orthonairovirus
+Psipapillomavirus 1,12.218770144761443,0.9999950631105035,7,-0.42807479862709275,Papovaviricetes,Zurhausenvirales,Papillomaviridae,Psipapillomavirus
+Mamastrovirus 15,29.27899409784417,0.9999999999998075,16,-0.4302577980303668,Stelpaviricetes,Stellavirales,Astroviridae,Mamastrovirus
+Simian mastadenovirus A,242.85976743621532,1.0,115,-0.4645020902182333,Tectiliviricetes,Rowavirales,Adenoviridae,Mastadenovirus
+Avastrovirus 2,9.293639991245321,0.9999080009212504,5,-0.5050059570615562,Stelpaviricetes,Stellavirales,Astroviridae,Avastrovirus
+Bat mastadenovirus B,51.77771413466726,1.0,25,-0.5246811671147804,Tectiliviricetes,Rowavirales,Adenoviridae,Mastadenovirus
+Entebbe bat virus,23.959633420879424,0.9999999999606937,12,-0.5277725804292008,Flasuviricetes,Amarillovirales,Flaviviridae,Flavivirus
+Pongine gammaherpesvirus 2,38.015784164587956,1.0,18,-0.5601487301921475,Herviviricetes,Herpesvirales,Herpesviridae,Lymphocryptovirus
+Mobala mammarenavirus,39.83736860828913,1.0,18,-0.6045406690356456,Ellioviricetes,Bunyavirales,Arenaviridae,Mammarenavirus
+Pegivirus B,4.143347837397512,0.9843782774920806,2,-0.6551010688077318,Flasuviricetes,Amarillovirales,Flaviviridae,Pegivirus
+Klamath tupavirus,23.37354200471659,0.9999999999293683,10,-0.6866046435444111,Monjiviricetes,Mononegavirales,Rhabdoviridae,Tupavirus
+Aotine betaherpesvirus 1,23.746032092381512,0.9999999999513336,10,-0.701600599272183,Herviviricetes,Herpesvirales,Herpesviridae,Cytomegalovirus
+Torque teno douroucouli virus,23.746032092381558,0.9999999999513336,10,-0.7016005992721848,,,Anelloviridae,Zetatorquevirus
+Mamastrovirus 18,34.69813219574592,0.9999999999999991,14,-0.7248534328486134,Stelpaviricetes,Stellavirales,Astroviridae,Mamastrovirus
+Iotapapillomavirus 1,17.12767409241501,0.9999999635627461,7,-0.7483928215628046,Papovaviricetes,Zurhausenvirales,Papillomaviridae,Iotapapillomavirus
+Luna mammarenavirus,17.12767409241505,0.9999999635627461,7,-0.7483928215628068,Ellioviricetes,Bunyavirales,Arenaviridae,Mammarenavirus
+Bat hepatitis virus,43.91834922267283,1.0,17,-0.7541999590798252,Revtraviricetes,Blubervirales,Hepadnaviridae,
+Panine gammaherpesvirus 1,201.97151365046355,1.0,69,-0.8004708821416964,Herviviricetes,Herpesvirales,Herpesviridae,Lymphocryptovirus
+Aravan lyssavirus,15.784888032037728,0.9999998604563206,6,-0.8251083753414394,Monjiviricetes,Mononegavirales,Rhabdoviridae,Lyssavirus
+Caviid herpesvirus 1,19.05150563629722,0.9999999946784734,7,-0.8493576012974848,Herviviricetes,Herpesvirales,Herpesviridae,
+Caviid betaherpesvirus 2,19.05150563629728,0.9999999946784734,7,-0.8493576012974875,Herviviricetes,Herpesvirales,Herpesviridae,
+Caviid herpesvirus 3,19.051505636297314,0.9999999946784734,7,-0.8493576012974893,Herviviricetes,Herpesvirales,Herpesviridae,
+Guinea pig adenovirus,19.05150563629733,0.9999999946784734,7,-0.8493576012974902,Tectiliviricetes,Rowavirales,Adenoviridae,Mastadenovirus
+Guinea pig type-c oncovirus,19.051505636297353,0.9999999946784734,7,-0.8493576012974915,Revtraviricetes,Ortervirales,Retroviridae,
+Yaounde virus,19.05548088829557,0.9999999946995859,7,-0.8495554858068635,Flasuviricetes,Amarillovirales,Flaviviridae,Flavivirus
+Hepatitis GB virus B,34.342033069275814,0.9999999999999989,12,-0.8692199272189067,Flasuviricetes,Amarillovirales,Flaviviridae,Hepacivirus
+Pipistrellus bat coronavirus HKU5,13.774025664781725,0.9999989576436714,5,-0.8781839871920305,Pisoniviricetes,Nidovirales,Coronaviridae,Betacoronavirus
+Warrego virus,38.22290590861402,1.0,13,-0.8907246400662663,Resentoviricetes,Reovirales,Reoviridae,Orbivirus
+Wallal virus,38.22290590861407,1.0,13,-0.8907246400662676,Resentoviricetes,Reovirales,Reoviridae,Orbivirus
+Ippy mammarenavirus,30.128099433992833,0.9999999999999176,10,-0.9273761133272198,Ellioviricetes,Bunyavirales,Arenaviridae,Mammarenavirus
+Khabarovsk orthohantavirus,50.598622680929296,1.0,16,-0.9491199094908662,Ellioviricetes,Bunyavirales,Hantaviridae,Orthohantavirus
+Orthohepevirus D,48.082889515460636,1.0,15,-0.9652885930021031,Alsuviricetes,Hepelivirales,Hepeviridae,Orthohepevirus
+El Moro Canyon orthohantavirus,75.71522290037713,1.0,23,-0.968498243594623,Ellioviricetes,Bunyavirales,Hantaviridae,Orthohantavirus
+Macropodid alphaherpesvirus 1,46.859083476668964,1.0,14,-1.009828577940591,Herviviricetes,Herpesvirales,Herpesviridae,Simplexvirus
+Phocid gammaherpesvirus 2,80.18394649182812,1.0,23,-1.022887161246775,Herviviricetes,Herpesvirales,Herpesviridae,
+Mopeia mammarenavirus,81.00529209287099,1.0,23,-1.0325531300520616,Ellioviricetes,Bunyavirales,Arenaviridae,Mammarenavirus
+Issyk-Kul virus,169.49590448138937,1.0,46,-1.039671899804139,Ellioviricetes,Bunyavirales,Nairoviridae,Orthonairovirus
+Human T-lymphotropic virus 4,86.73209065213587,1.0,24,-1.054782714867081,Revtraviricetes,Ortervirales,Retroviridae,Deltaretrovirus
+Gorilline gammaherpesvirus 1,86.73209065213595,1.0,24,-1.0547827148670819,Herviviricetes,Herpesvirales,Herpesviridae,Lymphocryptovirus
+Torque teno virus 23,187.39407212516087,1.0,48,-1.0923240138274308,,,Anelloviridae,Alphatorquevirus
+Panine betaherpesvirus 2,187.39407212516096,1.0,48,-1.0923240138274317,Herviviricetes,Herpesvirales,Herpesviridae,Cytomegalovirus
+Torque teno virus 4,187.39407212516124,1.0,48,-1.0923240138274335,,,Anelloviridae,Alphatorquevirus
+Torque teno virus 14,187.3940721251613,1.0,48,-1.0923240138274335,,,Anelloviridae,Alphatorquevirus
+Fort Morgan virus,52.85427293495442,1.0,14,-1.1240178885805894,Alsuviricetes,Martellivirales,Togaviridae,Alphavirus
+Possum atadenovirus A,10.541218000842974,0.9999735761732125,3,-1.1353030091413532,Tectiliviricetes,Rowavirales,Adenoviridae,Atadenovirus
+Pirital mammarenavirus,42.41615547856057,1.0,11,-1.1565086691953224,Ellioviricetes,Bunyavirales,Arenaviridae,Mammarenavirus
+Lambdapapillomavirus 5,10.993698560553883,0.999983193004639,3,-1.175166230725477,Papovaviricetes,Zurhausenvirales,Papillomaviridae,Lambdapapillomavirus
+Eubenangee virus,11.22275503413682,0.9999866336259035,3,-1.1947247046095602,Resentoviricetes,Reovirales,Reoviridae,Orbivirus
+Keuraliba ledantevirus,3.532697109019434,0.971603919580327,1,-1.1970224820953663,Monjiviricetes,Mononegavirales,Rhabdoviridae,Ledantevirus
+Taterapox virus,3.5326971090195523,0.9716039195803303,1,-1.197022482095398,Pokkesviricetes,Chitovirales,Poxviridae,Orthopoxvirus
+Macropodid alphaherpesvirus 2,43.42886878681975,1.0,10,-1.2741979829716432,Herviviricetes,Herpesvirales,Herpesviridae,Simplexvirus
+Murine mastadenovirus C,48.10497912410696,1.0,11,-1.2758791529974545,Tectiliviricetes,Rowavirales,Adenoviridae,Mastadenovirus
+Mustelid gammaherpesvirus 1,34.59687430934367,0.9999999999999991,8,-1.2816973118009227,Herviviricetes,Herpesvirales,Herpesviridae,Percavirus
+Phacochoerus africanus cytomegalovirus 1,8.076197255430605,0.9996892457210768,2,-1.288123373201358,Herviviricetes,Herpesvirales,Herpesviridae,Cytomegalovirus
+Suiformes rhadinovirus genogroup 1,8.076197255430623,0.9996892457210768,2,-1.2881233732013597,Herviviricetes,Herpesvirales,Herpesviridae,Rhadinovirus
+Lloviu cuevavirus,35.16610472501493,0.9999999999999996,8,-1.2971756544691448,Monjiviricetes,Mononegavirales,Filoviridae,Cuevavirus
+Yokose virus,35.166104725015025,0.9999999999999996,8,-1.297175654469147,Flasuviricetes,Amarillovirales,Flaviviridae,Flavivirus
+Mischivirus A,35.16610472501503,0.9999999999999996,8,-1.297175654469147,Pisoniviricetes,Picornavirales,Picornaviridae,Mischivirus
+West Caucasian bat lyssavirus,35.16610472501507,0.9999999999999996,8,-1.297175654469148,Monjiviricetes,Mononegavirales,Rhabdoviridae,Lyssavirus
+Serra do Navio mammarenavirus,114.34883901743856,1.0,24,-1.3169669839063158,Ellioviricetes,Bunyavirales,Arenaviridae,Mammarenavirus
+Murid herpesvirus 5,26.734865345762035,0.9999999999975497,6,-1.3248697871418122,Herviviricetes,Herpesvirales,Herpesviridae,
+Miniopterus bat coronavirus 1,36.43290179313832,0.9999999999999998,8,-1.3307414631954768,Pisoniviricetes,Nidovirales,Coronaviridae,Alphacoronavirus
+Paraguayan mammarenavirus,18.125508790424607,0.9999999865664269,4,-1.361715254944632,Ellioviricetes,Bunyavirales,Arenaviridae,Mammarenavirus
+Nariva narmovirus,42.696713522065615,1.0,9,-1.3634322549060398,Monjiviricetes,Mononegavirales,Paramyxoviridae,Narmovirus
+Torque teno tamarin virus,13.877765908204424,0.9999990603579648,3,-1.3961262963004561,,,Anelloviridae,Epsilontorquevirus
+Phocid alphaherpesvirus 1,191.46527304731848,1.0,36,-1.4003911929465032,Herviviricetes,Herpesvirales,Herpesviridae,Varicellovirus
+Cano Delgadito orthohantavirus,52.15769389548102,1.0,10,-1.4479069652250547,Ellioviricetes,Bunyavirales,Hantaviridae,Orthohantavirus
+Sigmapapillomavirus 1,20.639148258045655,0.9999999989122432,4,-1.484891960011305,Papovaviricetes,Zurhausenvirales,Papillomaviridae,Sigmapapillomavirus
+Cupixi mammarenavirus,55.2488777180344,1.0,10,-1.5025161468503931,Ellioviricetes,Bunyavirales,Arenaviridae,Mammarenavirus
+Torque teno zalophus virus 1,36.76885417949313,1.0,6,-1.6271293824211002,,,Anelloviridae,Lambdatorquevirus
+Pinniped bocaparvovirus 1,36.76885417949315,1.0,6,-1.6271293824211006,Quintoviricetes,Piccovirales,Parvoviridae,Bocaparvovirus
+Dyonupapillomavirus 1,36.768854179493154,1.0,6,-1.627129382421101,Papovaviricetes,Zurhausenvirales,Papillomaviridae,Dyonupapillomavirus
+Pinniped dependoparvovirus 1,36.76885417949321,1.0,6,-1.6271293824211024,Quintoviricetes,Piccovirales,Parvoviridae,Dependoparvovirus
+Pinniped bocaparvovirus 2,36.76885417949327,1.0,6,-1.6271293824211042,Quintoviricetes,Piccovirales,Parvoviridae,Bocaparvovirus
+Mamastrovirus 4,36.7724691823266,1.0,6,-1.6272226281483477,Stelpaviricetes,Stellavirales,Astroviridae,Mamastrovirus
+Mount Elgon bat ledantevirus,5.664062510302286,0.9965435903674205,1,-1.644774058881019,Monjiviricetes,Mononegavirales,Rhabdoviridae,Ledantevirus
+Isla Vista hantavirus,38.149367664048356,1.0,6,-1.6620879873552368,Ellioviricetes,Bunyavirales,Hantaviridae,Orthohantavirus
+Mamastrovirus 11,60.211496207655905,1.0,9,-1.6894592204601477,Stelpaviricetes,Stellavirales,Astroviridae,Mamastrovirus
+Avian orthoreovirus,21.187794447607935,0.9999999993715687,3,-1.7974576142848184,Resentoviricetes,Reovirales,Reoviridae,Orthoreovirus
+Volepox virus,59.75681402805545,1.0,8,-1.8000528137005851,Pokkesviricetes,Chitovirales,Poxviridae,Orthopoxvirus
+Bear Canyon mammarenavirus,14.878588007139307,0.9999996546088702,2,-1.8676379714104954,Ellioviricetes,Bunyavirales,Arenaviridae,Mammarenavirus
+Dyoetapapillomavirus 1,7.296801343015911,0.9993227559188217,1,-1.8850154443156732,Papovaviricetes,Zurhausenvirales,Papillomaviridae,Dyoetapapillomavirus
+Bokeloh bat lyssavirus,15.222400239635089,0.9999997550962314,2,-1.8893055906997103,Monjiviricetes,Mononegavirales,Rhabdoviridae,Lyssavirus
+Mosavirus A,15.817185454367394,0.9999998648912178,2,-1.9256593352770954,Pisoniviricetes,Picornavirales,Picornaviridae,Mosavirus
+Allpahuayo mammarenavirus,8.327872048243794,0.9997583726041315,1,-2.010375978530147,Ellioviricetes,Bunyavirales,Arenaviridae,Mammarenavirus

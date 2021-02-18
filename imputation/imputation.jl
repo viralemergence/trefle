@@ -143,6 +143,14 @@ yaxis!(:log, (0.9, 500), "Number of paths to human")
 plot!(x -> coef(regmodel)[1]x, lab="", lw=2.0, c=:darkgrey, ls=:dash)
 savefig("figures/number_of_paths.png")
 
+tax = unique(select(clover_df, [:VirusClass, :VirusOrder, :VirusFamily, :VirusGenus, :Virus]))
+path_zoo = leftjoin(path_zoo, tax, on = :virus => :Virus, matchmissing = :equal)
+
+@df dropmissing(select(path_zoo, [:residuals, :VirusOrder])) dotplot(:VirusOrder, :residuals, group=:VirusOrder, legend=:outerleft, size=(1000, 400), frame=:zerolines)
+xaxis!(rotation=90)
+
+CSV.write(joinpath("artifacts", "number_of_paths.csv"), path_zoo)
+
 
 # Overlap analysis
 overlap_results = DataFrame(sp = String[], step = Symbol[], score = Float64[])
