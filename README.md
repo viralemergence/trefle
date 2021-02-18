@@ -231,6 +231,18 @@ shape of the network change, with less clusters of mostly homogenous species.
 | Homo sapiens | Simian mastadenovirus A     | 242.8597 |
 | Homo sapiens | Canine mastadenovirus A     | 275.6808 |
 
+### Zoonotic viruses have more paths to reach human
+
+This next figure is the evidence for (potential novel) zoonotic viruses in
+`trefle`, compared to the number of paths existing from this virus to *H.
+sapiens* in `clover`. The log-log relationship is quite clear: viruses that are
+more likely to be zoonotic according to our model have more direct paths (bridge
+hosts) to reach human.
+
+![number of paths to huuman](figures/number_of_paths.png)
+
+The same relationship holds for 2 jumps, 3 jumps, and 4 jumps.
+
 ### Imputation removes the livestock bias
 
 The original data that went into `clover` had a lot of information about

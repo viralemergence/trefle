@@ -6,6 +6,7 @@ using Statistics
 using EcologicalNetworks
 using EcologicalNetworksPlots
 using TSne
+using GLM
 
 # Get the main predictions
 predictions = DataFrame(CSV.File("hpc/outputs/predictions.csv"))
@@ -109,6 +110,31 @@ p_imput = scatter(IM, imputed_clover, bipartite=true, nodesize=degree(imputed_cl
 
 plot(p_orig, p_imput)
 savefig("figures/before-after.png")
+
+# Number of paths
+top_zoo = zoonoses.virus#vec(zoonoses[end-19:end,:].virus)
+TMP = UnipartiteQuantitativeNetwork(number_of_paths(UCLOV; n=3), EcologicalNetworks._species_objects(UCLOV)...)
+i = interactions(TMP)
+filter!(int -> int.from != int.to, i)
+filter!(int -> "Homo sapiens" in [int.from], i)
+filter!(int -> int.to in top_zoo, i)
+df = DataFrame(virus = String[], paths = Int64[])
+for int in i
+    push!(df, (int.to, int.strength))
+end
+
+path_zoo = leftjoin(zoonoses, df, on=:virus)
+
+@df path_zoo scatter(:evidence, :paths, frame=:box, lab="", dpi=400, c=:grey)
+xaxis!(:log, "Evidence of interaction")
+yaxis!(:log, "Number of paths to human")
+savefig("figures/number_of_paths.png")
+
+# Residuals from number of paths
+X = log.(path_zoo.evidence)
+y = log.(path_zoo.paths)
+
+regmodel = lm(permutedims(permutedims(X)), y)
 
 # Overlap analysis
 overlap_results = DataFrame(sp = String[], step = Symbol[], score = Float64[])
