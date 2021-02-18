@@ -125,16 +125,24 @@ end
 
 path_zoo = leftjoin(zoonoses, df, on=:virus)
 
-@df path_zoo scatter(:evidence, :paths, frame=:box, lab="", dpi=400, c=:grey)
-xaxis!(:log, "Evidence of interaction")
-yaxis!(:log, "Number of paths to human")
-savefig("figures/number_of_paths.png")
-
 # Residuals from number of paths
 X = log.(path_zoo.evidence)
 y = log.(path_zoo.paths)
 
 regmodel = lm(permutedims(permutedims(X)), y)
+
+path_zoo.residuals = residuals(regmodel)
+sort!(path_zoo, :residuals, rev=true)
+select!(path_zoo, Not(:value))
+select!(path_zoo, Not(:host))
+
+
+@df path_zoo scatter(:evidence, :paths, frame=:box, lab="", dpi=400, marker_z=path_zoo.residuals, aspectratio=1, clim=(-3,3), c=:PRGn)
+xaxis!(:log, (0.9, 500), "Evidence of interaction")
+yaxis!(:log, (0.9, 500), "Number of paths to human")
+plot!(x -> coef(regmodel)[1]x, lab="", lw=2.0, c=:darkgrey, ls=:dash)
+savefig("figures/number_of_paths.png")
+
 
 # Overlap analysis
 overlap_results = DataFrame(sp = String[], step = Symbol[], score = Float64[])
