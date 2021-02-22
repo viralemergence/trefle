@@ -192,6 +192,7 @@ Contact: `timothee.poisot@umontreal.🇨🇦`
     - `trefle.csv` is the edgelist of `clover` plus the imputed associations, sorted by virus name (~ 3MB)
     - `phylo_distance_to_human.csv` is the phylogenetic distance between *H. sapiens* and other taxa in the Upham tree
     - `sharing-phylogeny.csv` is a table with the Jaccard similarity of viruses, number of shared viruses, and phylogenetic distance between pairs of hosts -- it contains both the *before* and *after*  imputation step
+    - `viral_subspace.csv` are truncated SVD embeddings of the left-subspace (viruses) at rank 12 multiplied by the square root of the eigenvalues, as in a RDGP.
 - `demo-phylogeny` contains a visualization of phylogenetic signal to the data and predictions as a use case vignette 
 - `R` has `.r` files to read the phylogeny
 

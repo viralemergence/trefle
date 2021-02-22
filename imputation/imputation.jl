@@ -48,6 +48,19 @@ for r in eachrow(imputed)
     imputed_clover[r.virus, r.host] = true
 end
 
+# Embeddings for Nardus
+Lc, Rc = rdpg(clover, 12)
+Lt, Rt = rdpg(imputed_clover, 12)
+df = DataFrame(virus = String[], rank = Int[], clover = Float64[], trefle = Float64[])
+for i in 1:size(L, 1)
+    for j in 1:size(L, 2)
+        push!(df, (species(clover; dims=1)[i], j, Lc[i,j], Lt[i,j]))
+    end
+end
+CSV.write(joinpath("artifacts", "viral_subspace.csv"), df)
+
+
+# Writing the predictions
 d = DataFrame(virus = String[], host = String[])
 for int in interactions(imputed_clover)
     push!(d, (int.from, int.to))
