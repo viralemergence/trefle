@@ -280,6 +280,19 @@ There are two main results:
 1. The missing links recommended by SVD have a strong phylogenetic signal even though it's trait agnostic, implying the signal in the network is strong enough to be propagated by latent factor approaches. (SVD is good)
 2. The less sparse the matrix becomes, the more we will need to move from thinking about sharing networks as binary networks to weighted ones, which is a bit of a change from the last 20 years of sharing work like the GMPD-based work (count data matters)
 
+### The impact of sampling bias on viral richness is reduced after imputation
+
+Observe host-parasite association networks are heavily influenced by samplin biases across hosts and parasites. In comprative analyses of the number of documented viral species per host species, research effort is often the strongest predictor. These models typically use number of publication per host species as a measure of sampling effort, and find that well researched hosts are found to harbour a larger number of viruses. To explore whether network imputation via LF-SVD is extrapolating from previous sampling biases, we conducted a set of comparative analyses investigating the how the explanatory power of sampling efforts on viral species richness changes after network imputation. We find that sampling effort explains less of the variance in viral richness after imputation, suggesting that imputation vir LF-SVD is not merely recapitulating the observed sampling effort per host.
+
+|Response               | Predictor             |Slope  | Std. Error | R Squared | Lambda | Lambda 95% CI |
+|-----------------------|-----------------------|-------|------------|-----------|--------|---------------|
+|Viral Richness (clover)| # pubs                | 0.53  | 0.02       | 0.46      | 0.59   | 0.47 - 0.69   | 
+|Viral Richness (trefle)| # pubs                | 0.39  | 0.02       | 0.23      | 0.59   | 0.45 - 0.72   | 
+|Viral Richness (clover)| # virus related pubs  | 0.71  | 0.02       | 0.54      | 0.45   | 0.31 - 0.58   | 
+|Viral Richness (trefle)| # virus related pubs  | 0.47  | 0.03       | 0.22      | 0.60   | 0.46 - 0.71   | 
+
+
+
 ### Spatial analysis of hotspots of viral diversity
 
 **Analysis in development**: @tpoisot - comparison of pre and post-imputation LCBD

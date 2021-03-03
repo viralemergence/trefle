@@ -1,0 +1,16 @@
+% latex table generated in R 4.0.0 by xtable 1.8-4 package
+% Wed Mar  3 12:30:31 2021
+\begin{table}[ht]
+\centering
+\begin{tabular}{ccccccc}
+  \hline
+Response & Predictor & Slope & Std. Error & R Squared & Lambda & Lambda 95\% CI \\ 
+  \hline
+Viral Richness (clover) & \# pubs & 0.53 & 0.02 & 0.46 & 0.59 & 0.47 - 0.69 \\ 
+  Viral Richness (trefle) & \# pubs & 0.39 & 0.02 & 0.23 & 0.59 & 0.45 - 0.72 \\ 
+  Viral Richness (clover) & \# virus related pubs & 0.71 & 0.02 & 0.54 & 0.45 & 0.31 - 0.58 \\ 
+  Viral Richness (trefle) & \# virus related pubs & 0.47 & 0.03 & 0.22 & 0.60 & 0.46 - 0.71 \\ 
+   \hline
+\end{tabular}
+\caption{Estimated parameters for models of viral richness per host. Models are fit using phylogenetic generalized least squares (PGLS) via the R pagkage caper (Orme et al 2013). Response and predictor variables were log10 transformed prior to model fitting.} 
+\end{table}

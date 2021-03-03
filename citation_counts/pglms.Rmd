@@ -1,0 +1,138 @@
+---
+title: 'Imputation and the viral richness ~ citation count relationship'
+output: pdf_document
+editor_options: 
+  chunk_output_type: console
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(fig.width=3, fig.height=3, fig.align='center',out.width=c('50%', '50%'), fig.show='hold') 
+
+```
+
+# Setup
+
+```{r data, message=FALSE}
+
+library(ape)
+library(dplyr)
+library(caper)
+
+# data
+clover <- read.csv("../data/clover.csv")
+tref <- read.csv("../artifacts/trefle.csv")
+cites <- read.csv("../data/PubMed_HostCounts_Total_CLOVER.csv") # from Rory Gibb
+phylo_trans <- read.csv("../data/mammal_phylo_translations.csv")
+phy <- read.nexus("../data/upham_tree.nex")
+phy$tip.label <- gsub("_"," ", phy$tip.label)
+
+# match names to phylogeny
+lookup <- setNames(phylo_trans$Host_Upham, phylo_trans$Host)
+clover$Host <- lookup[clover$Host]
+tref$host <- lookup[tref$host]
+cites$Host <- lookup[cites$Host]
+
+# Calculate viral richness per host (aka parasite species richness, aka PSR)
+PSR_tref <- colSums(table(tref))
+PSR_clover <- colSums(table(clover[,c("Virus","Host")]))
+
+# join into dataframe with citation counts
+PSR_tref <- data.frame(Host=names(PSR_tref), PSR_tref=PSR_tref)
+PSR_clover <- data.frame(Host=names(PSR_clover), PSR_clover=PSR_clover)
+dat <- left_join(cites, PSR_clover)
+dat <- left_join(dat, PSR_tref)
+
+# Because of the name merger, some species have more than one citation count estimate
+# Removing duplicates, but keeping estimates with highest citation count
+dat <- dat[order(dat$Host, -abs(dat$Pubs_All) ),] 
+dat <- dat[!duplicated(dat$Host),] 
+
+# log transformations
+dat$PSR_clover <- log10(dat$PSR_clover)
+dat$PSR_tref <- log10(dat$PSR_tref)
+dat$Pubs_All <- log10(dat$Pubs_All+1)
+dat$Pubs_VirusRelated <- log10(dat$Pubs_VirusRelated+1)
+
+comp.data <- comparative.data(phy, dat, names.col="Host", warn.dropped=TRUE)
+
+```
+
+
+# Models using all publications 
+
+
+```{r models, message=FALSE}
+
+if (!file.exists("m1.rds")){
+
+	m1 <- pgls(PSR_clover ~ Pubs_All, data=comp.data, lambda="ML")
+	saveRDS(m1, "m1.rds")
+
+} else { m1 <- readRDS("m1.rds") }
+summary(m1)
+
+
+if (!file.exists("m2.rds")){
+
+	m2 <- pgls(PSR_tref ~ Pubs_All, data=comp.data, lambda="ML")
+	saveRDS(m2, "m2.rds")
+
+} else { m2 <- readRDS("m2.rds") }
+summary(m2)
+
+```
+
+
+# Sensitivity analyses: citation counts using only "virus" related publications 
+
+```{r models2, message=FALSE}
+# sensitivity analyses with Pubs_VirusRelated
+
+if (!file.exists("m1_2.rds")){
+
+	m1.2 <- pgls(PSR_clover ~ Pubs_VirusRelated, data=comp.data, lambda="ML")
+	saveRDS(m1.2, "m1_2.rds")
+
+} else { m1.2 <- readRDS("m1_2.rds") }
+summary(m1.2)
+
+
+if (!file.exists("m2_2.rds")){
+	m2.2 <- pgls(PSR_tref ~ Pubs_VirusRelated, data=comp.data, lambda="ML")
+	saveRDS(m2.2, "m2_2.rds")
+
+} else { m2.2 <- readRDS("m2_2.rds") }
+summary(m2.2)
+
+```
+
+\newpage
+
+# Summary Table
+
+```{r summarytab, message=FALSE, results='asis', echo=FALSE}
+require(xtable)
+
+summarytab <- data.frame(
+				Response=rep(c("Viral Richness (clover)", "Viral Richness (trefle)"),2),
+				Predictor=rep(c("# pubs", "# virus related pubs"), each=2),
+				Slope = c(m1$model$coef[2,1],m2$model$coef[2,1], m1.2$model$coef[2,1], m2.2$model$coef[2,1]),
+				StdError = c(summary(m1)$coefficients[2,2], summary(m2)$coefficients[2,2], summary(m1.2)$coefficients[2,2], summary(m2.2)$coefficients[2,2]),
+				Rsquared=c(summary(m1)$r.squared,summary(m2)$r.squared,summary(m1.2)$r.squared,summary(m2.2)$r.squared),
+				Lambda=c(m1$param["lambda"], m2$param["lambda"], m1.2$param["lambda"], m2.2$param["lambda"]),
+				Lambda95CI=c(paste(round(m1$param.CI$lambda$ci.val, 2), collapse=" - "),paste(round(m2$param.CI$lambda$ci.val, 2), collapse=" - "),paste(round(m1.2$param.CI$lambda$ci.val, 2), collapse=" - "),paste(round(m2.2$param.CI$lambda$ci.val, 2), collapse=" - ")))
+
+names(summarytab) <- c("Response","Predictor","Slope","Std. Error","R Squared","Lambda","Lambda 95% CI")
+
+summary.table <- xtable(summarytab, caption = "Estimated parameters for models of viral richness per host. Models are fit using phylogenetic generalized least squares (PGLS) via the R pagkage caper (Orme et al 2013). Response and predictor variables were log10 transformed prior to model fitting.")
+
+align(summary.table) <- rep("c", 8)
+
+print(summary.table, include.rownames=FALSE, latex.environments = "center", comment=FALSE)
+print(summary.table, include.rownames=FALSE, latex.environments = "center",file="summarytable.txt")
+
+
+```
+
