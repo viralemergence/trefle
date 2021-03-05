@@ -295,6 +295,8 @@ Observed host-parasite association networks are heavily influenced by sampling b
 
 ### Spatial analysis of hotspots of viral diversity
 
+![LCBD](figures/lcbd-panel.png)
+
 **Analysis in development**: @tpoisot - comparison of pre and post-imputation LCBD
 
 ## Get involved
