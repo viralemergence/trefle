@@ -49,12 +49,15 @@ for r in eachrow(imputed)
 end
 
 # Embeddings for Nardus
+nohuman = filter(!isequal("Homo sapiens"), species(clover, dims=2))
 Lc, Rc = rdpg(clover, 12)
 Lt, Rt = rdpg(imputed_clover, 12)
-df = DataFrame(virus = String[], rank = Int[], clover = Float64[], trefle = Float64[])
-for i in 1:size(L, 1)
-    for j in 1:size(L, 2)
-        push!(df, (species(clover; dims=1)[i], j, Lc[i,j], Lt[i,j]))
+Lnc, Rnc = rdpg(clover[:,nohuman], 12)
+Lnt, Rnt = rdpg(imputed_clover[:,nohuman], 12)
+df = DataFrame(virus = String[], rank = Int[], clover = Float64[], trefle = Float64[], clover_nohuman = Float64[], trefle_nohuman = Float64[])
+for i in 1:size(Lc, 1)
+    for j in 1:size(Lc, 2)
+        push!(df, (species(clover; dims=1)[i], j, Lc[i,j], Lt[i,j], Lnc[i,j], Lnt[i,j]))
     end
 end
 CSV.write(joinpath("artifacts", "viral_subspace.csv"), df)
