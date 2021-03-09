@@ -50,10 +50,11 @@ end
 
 # Embeddings for Nardus
 nohuman = filter(!isequal("Homo sapiens"), species(clover, dims=2))
-Lc, Rc = rdpg(clover, 12)
-Lt, Rt = rdpg(imputed_clover, 12)
-Lnc, Rnc = rdpg(clover[:,nohuman], 12)
-Lnt, Rnt = rdpg(imputed_clover[:,nohuman], 12)
+rnk = 12
+Lc, Rc = rdpg(clover, rnk)
+Lt, Rt = rdpg(imputed_clover, rnk)
+Lnc, Rnc = rdpg(clover[:,nohuman], rnk)
+Lnt, Rnt = rdpg(imputed_clover[:,nohuman], rnk)
 df = DataFrame(virus = String[], rank = Int[], clover = Float64[], trefle = Float64[], clover_nohuman = Float64[], trefle_nohuman = Float64[])
 for i in 1:size(Lc, 1)
     for j in 1:size(Lc, 2)
