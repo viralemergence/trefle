@@ -292,6 +292,38 @@ Observed host-parasite association networks are heavily influenced by sampling b
 |Viral Richness (trefle)| # virus related pubs  | 0.47  | 0.03       | 0.22      | 0.60   | 0.46 - 0.71   | 
 
 
+### The imputed network improves zoonotic ranking models
+
+Knowing the network of observed (non-human) hosts for each virus increases the probability that a randomly chosen *known* human-infecting virus is ranked above viruses that have not been detected in humans. Imputing missing links improves this even further, to the point where adding in the genomic features from the original model gives only a minor improvement.
+
+|Model                                 | AUC (mean)  | SD    |
+|--------------------------------------|-------------|-------|
+|Genome composition                    | 0.718       | 0.050 |
+|Observed network                      | 0.774       | 0.051 |
+|Genome composition + Observed network | 0.817       | 0.039 | 
+|Imputed network                       | 0.850       | 0.043 |
+|Genome composition + Imputed network  | 0.860       | 0.038 |
+
+In the combined genome composition + imputed network model, features describing the network are more important.
+
+![zoonotic rank result](figures/zoonotic-rank.png)
+
+The order for SVD-related features in panel B are:
+
+| Importance rank | SVD rank |
+|-----------------|----------|
+| 1               | 2        |
+| 2               | 1        |
+| 3               | 11       |
+| 4               | 3        |
+| 5               | 7        |
+| 6               | 12       |
+| 9               | 4        |
+| 19              | 10       |
+| 21              | 6        |
+| 30              | 9        |
+| 53              | 8        |
+| 64              | 5        |
 
 ### Spatial analysis of hotspots of viral diversity
 
