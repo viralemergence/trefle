@@ -29,3 +29,6 @@ Manifest.toml
 # We want to allow the specific beluga manifest
 !hpc/inputs/Manifest.toml
 .Rhistory
+wc5/alt.bil
+wc5/alt.hdr
+wc5/alt_5m_bil.zip

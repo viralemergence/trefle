@@ -101,31 +101,47 @@ all.data %>%
   filter(PhyloDist > 0) %>% # kill self-similarity 
   filter(log(PhyloDist) < 5.5) -> all.data #kill monotremes
 
-all.data %>% 
-  ggplot(aes(x = PhyloDist, y = Counts, group = Source, color = Source)) +  
-  geom_smooth(method = 'glm',  
-              method.args = list(family = poisson)) + 
-  theme_bw() -> upper.right
+all.data %<>% rename(Dataset = "Source")
+all.data %<>% mutate(Dataset = recode(Dataset, !!!c("Post" = "Imputed network", "Pre" = "Raw network")))
 
 all.data %>% 
-  ggplot(aes(x = PhyloDist, y = Sharing, group = Source, color = Source)) + 
+  ggplot(aes(x = PhyloDist, y = Counts, group = Dataset, color = Dataset)) +  
+  geom_smooth(method = 'glm',  
+              method.args = list(family = poisson)) + 
+  xlab("Phylogenetic distance (pairwise)") +
+  ylab("Number of viruses shared") + 
+  theme_bw() + 
+  scale_color_manual(values = c("#d1495b","#00798c"))  -> upper.right
+
+all.data %>% 
+  ggplot(aes(x = PhyloDist, y = Sharing, group = Dataset, color = Dataset)) + 
   geom_smooth(method = 'glm',  
               method.args = list(family = binomial(link = 'logit'))) + 
-  theme_bw() -> upper.left
+  xlab("Phylogenetic distance (pairwise)") +
+  ylab("Viral sharing") + 
+  theme_bw() + 
+  scale_color_manual(values = c("#d1495b","#00798c")) -> upper.left
 
 all.data %>% 
   filter(Host == "Homo sapiens") %>%
-  ggplot(aes(x = PhyloDist, y = Counts, group = Source, color = Source)) + 
+  ggplot(aes(x = PhyloDist, y = Counts, group = Dataset, color = Dataset)) + 
   geom_smooth(method = 'glm',  
               method.args = list(family = poisson)) + 
-  theme_bw() -> bottom.right
+  xlab("Phylogenetic distance from humans") +
+  ylab("Number of viruses shared") + 
+  theme_bw() + 
+  scale_color_manual(values = c("#d1495b","#00798c"))  -> bottom.right
 
 all.data %>% 
   filter(Host == "Homo sapiens") %>%
-  ggplot(aes(x = PhyloDist, y = Sharing, group = Source, color = Source)) + 
+  ggplot(aes(x = PhyloDist, y = Sharing, group = Dataset, color = Dataset)) + 
   #geom_point() + 
   geom_smooth(method = 'glm',  
               method.args = list(family = binomial(link = 'logit'))) + 
-  theme_bw() -> bottom.left
+  xlab("Phylogenetic distance from humans") +
+  ylab("Viral sharing") + 
+  theme_bw() + 
+  scale_color_manual(values = c("#d1495b","#00798c")) -> bottom.left
 
-(upper.left + upper.right) / (bottom.left + bottom.right) + plot_layout(guides = 'collect') 
+(upper.left + upper.right) / (bottom.left + bottom.right) + plot_layout(guides = 'collect') &
+  theme(legend.position='bottom')
