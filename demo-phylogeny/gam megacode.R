@@ -145,3 +145,60 @@ all.data %>%
 
 (upper.left + upper.right) / (bottom.left + bottom.right) + plot_layout(guides = 'collect') &
   theme(legend.position='bottom')
+
+######
+
+library(rsq)
+
+
+
+m0 <- glm(Sharing ~ PhyloDist, family = binomial(link = 'logit'), data = (all.data %>% filter(Dataset == 'Raw network')))
+s0 <- summary(m0); s0 
+rsq(m0, adj = TRUE)
+
+m1 <- glm(Sharing ~ PhyloDist, family = binomial(link = 'logit'), data = (all.data %>% filter(Dataset == 'Imputed network')))
+s1 <- summary(m1); s1
+rsq(m1, adj = TRUE)
+
+
+m0 <- glm(Sharing ~ PhyloDist, family = binomial(link = 'logit'), data = (all.data %>% filter(Dataset == 'Raw network', Host == 'Homo sapiens')))
+s0 <- summary(m0); s0 
+rsq(m0, adj = TRUE)
+
+m1 <- glm(Sharing ~ PhyloDist, family = binomial(link = 'logit'), data = (all.data %>% filter(Dataset == 'Imputed network', Host == 'Homo sapiens')))
+s1 <- summary(m1); s1
+rsq(m1, adj = TRUE)
+
+
+
+
+
+
+
+
+
+
+m0 <- glm(Counts ~ PhyloDist, family = binomial(link = 'logit'), data = (all.data %>% filter(Dataset == 'Raw network')))
+s0 <- summary(m0); s0 
+rsq(m0, adj = TRUE)
+
+m1 <- glm(Counts ~ PhyloDist, family = "poisson", data = (all.data %>% filter(Dataset == 'Imputed network')))
+s1 <- summary(m1); s1
+rsq(m1, adj = TRUE)
+
+
+m0 <- glm(Counts ~ PhyloDist, family = "poisson", data = (all.data %>% filter(Dataset == 'Raw network', Host == 'Homo sapiens')))
+s0 <- summary(m0); s0 
+rsq(m0, adj = TRUE)
+
+m1 <- glm(Counts ~ PhyloDist, family = "poisson", data = (all.data %>% filter(Dataset == 'Imputed network', Host == 'Homo sapiens')))
+s1 <- summary(m1); s1
+rsq(m1, adj = TRUE)
+
+
+
+
+
+
+
+
