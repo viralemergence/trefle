@@ -293,6 +293,7 @@ Observed host-parasite association networks are heavily influenced by sampling b
 
 
 ### The imputed network improves zoonotic ranking models
+Code for this section can be found in [viralemergence/haystack_zoonotic](https://github.com/viralemergence/haystack_zoonotic).
 
 Knowing the network of observed (non-human) hosts for each virus increases the probability that a randomly chosen *known* human-infecting virus is ranked above viruses that have not been detected in humans. Imputing missing links improves this even further, to the point where adding in the genomic features from the original model gives only a minor improvement.
 
