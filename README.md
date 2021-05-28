@@ -295,36 +295,18 @@ Observed host-parasite association networks are heavily influenced by sampling b
 ### The imputed network improves zoonotic ranking models
 Code for this section can be found in [viralemergence/haystack_zoonotic](https://github.com/viralemergence/haystack_zoonotic).
 
-Knowing the network of observed (non-human) hosts for each virus increases the probability that a randomly chosen *known* human-infecting virus is ranked above viruses that have not been detected in humans. Imputing missing links improves this even further, to the point where adding in the genomic features from the original model gives only a minor improvement.
+Knowing the network of observed (non-human) hosts for each virus increases the probability that a randomly chosen *known* human-infecting virus is ranked above viruses that have not been detected in humans. Imputing missing links improves this even further.
 
-|Model                                 | AUC (mean)  | SD    |
-|--------------------------------------|-------------|-------|
-|Genome composition                    | 0.718       | 0.050 |
-|Observed network                      | 0.774       | 0.051 |
-|Genome composition + Observed network | 0.817       | 0.039 | 
-|Imputed network                       | 0.850       | 0.043 |
-|Genome composition + Imputed network  | 0.860       | 0.038 |
+|Model                                 | AUC (mean)  | SD    | AUC (bagged) |
+|--------------------------------------|-------------|-------|--------------|
+|Genome composition                    | 0.723       | 0.053 | 0.755        |
+|Genome composition + Observed network | 0.830       | 0.043 | 0.848        |
+|Genome composition + Imputed network  | 0.875       | 0.036 | 0.898        |
 
-In the combined genome composition + imputed network model, features describing the network are more important.
+In the combined genome composition + imputed network model, features describing the imputed network are more important.
 
-![zoonotic rank result](figures/zoonotic-rank.png)
+![zoonotic rank result](figures/human_models_main.png)
 
-The order for SVD-related features in panel B are:
-
-| Importance rank | SVD rank |
-|-----------------|----------|
-| 1               | 2        |
-| 2               | 1        |
-| 3               | 11       |
-| 4               | 3        |
-| 5               | 7        |
-| 6               | 12       |
-| 9               | 4        |
-| 19              | 10       |
-| 21              | 6        |
-| 30              | 9        |
-| 53              | 8        |
-| 64              | 5        |
 
 ### Spatial analysis of hotspots of viral diversity
 
