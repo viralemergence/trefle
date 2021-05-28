@@ -8,7 +8,8 @@ imputation, a two-step algorithm where novel host-virus associations are
 recommended based on truncated singular value decomposition applied to initial
 values based on a linear filter.
 
-[![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+
 
 
 [clover]: https://github.com/viralemergence/clover
