@@ -32,3 +32,10 @@ Manifest.toml
 wc5/alt.bil
 wc5/alt.hdr
 wc5/alt_5m_bil.zip
+
+# Remove the mapping files (notably IUCN ranges)
+mapping/MAMMALS*
+mapping/IUCN*
+mapping/METADATA*
+mapping/assets
+mapping/rasters/*.tif
