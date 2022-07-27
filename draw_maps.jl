@@ -7,13 +7,8 @@ using Statistics
 using StatsBase
 using GLM
 using SparseArrays
-
-theme(:mute)
-
-# Prepare the layer according to the IUCN limits
-struct IUCNRange <: SimpleSDMLayers.SimpleSDMSource end
-SimpleSDMLayers.latitudes(::Type{IUCNRange}) = (-55.979464, 83.627436)
-SimpleSDMLayers.longitudes(::Type{IUCNRange}) = (-179.999000, 179.999000)
+import GDAL
+using ArchGDAL
 
 # List of species in trefle
 trefle = DataFrame(CSV.File(joinpath(@__DIR__, "artifacts", "trefle.csv")))
@@ -48,13 +43,30 @@ for host in hosts
     @info host
     fname = joinpath(raster_path, replace(host, " " => "_") * ".tif")
     if ~isfile(fname)
-        query = `gdal_rasterize -l "MAMMALS_TERRESTRIAL_ONLY" -a presence mapping/MAMMALS_TERRESTRIAL_ONLY.shp $(fname) -where "binomial LIKE '$(host)'" -ts 400, 200`
-        run(query)
+        try
+            query = `gdal_rasterize
+                        -l "MAMMALS"
+                        -where "binomial = '$(host)'"
+                        -a presence
+                        -ts 800 400
+                        -ot Byte
+                        mapping/MAMMALS/MAMMALS.shp
+                        $(fname)
+                    `
+            run(query)
+            if iszero(filesize(fname))
+                rm(fname)                
+            else
+                mp = SimpleSDMLayers.geotiff(SimpleSDMPredictor, fname, 1)
+                replace!(mp.grid, zero(eltype(mp)) => nothing)
+                ranges[host] = mp
+                mp = nothing
+            end
+            GC.gc()
+        catch e
+            @info "nope"
+        end
     end
-    #mp = SimpleSDMLayers.raster(SimpleSDMResponse, IUCNRange(), fname)
-    #ranges[host] = mp
-    #mp = nothing
-    GC.gc()
 end
 
 # LCDB / SCBD
