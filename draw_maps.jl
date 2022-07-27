@@ -13,11 +13,11 @@ theme(:mute)
 # Prepare the layer according to the IUCN limits
 struct IUCNRange <: SimpleSDMLayers.SimpleSDMSource end
 SimpleSDMLayers.latitudes(::Type{IUCNRange}) = (-55.979464, 83.627436)
-SimpleSDMLayers.longitudes(::Type{IUCNRange}) = (-179.999000,179.999000)
+SimpleSDMLayers.longitudes(::Type{IUCNRange}) = (-179.999000, 179.999000)
 
 # List of species in trefle
-trefle = DataFrame(CSV.File(joinpath("..", "trefle.csv")))
-clover = DataFrame(CSV.File(joinpath("..", "clover.csv")))
+trefle = DataFrame(CSV.File(joinpath(@__DIR__, "artifacts", "trefle.csv")))
+clover = DataFrame(CSV.File(joinpath(@__DIR__, "data", "clover.csv")))
 hosts = unique(trefle.host)
 viruses = unique(trefle.virus)
 
@@ -32,20 +32,28 @@ for v in eachrow(clover)
     CLOVER[v.Virus, v.Host] = true
 end
 
-ispath("rasters") || mkdir("rasters")
+# Get the zoonotic components
+zoo_clover = CLOVER[:, "Homo sapiens"]
+zoo_trefle = TREFLE[:, "Homo sapiens"]
+
+zCLOVER = simplify(CLOVER[collect(zoo_clover), :])
+zTREFLE = simplify(TREFLE[collect(zoo_trefle), :])
+
+raster_path = joinpath(@__DIR__, "mapping", "rasters")
+ispath(raster_path) || mkdir(raster_path)
 
 # Get the predictors
-ranges = Dict{String,SimpleSDMPredictor}() 
+ranges = Dict{String,SimpleSDMPredictor}()
 for host in hosts
     @info host
-    fname = joinpath("rasters", replace(host, " " => "_")*".tif")
+    fname = joinpath(raster_path, replace(host, " " => "_") * ".tif")
     if ~isfile(fname)
-        query = `gdal_rasterize -l "MAMMALS_TERRESTRIAL_ONLY" -a presence MAMMALS_TERRESTRIAL_ONLY.shp $(fname) -where "binomial LIKE '$(host)'" -ts 400, 200`
+        query = `gdal_rasterize -l "MAMMALS_TERRESTRIAL_ONLY" -a presence mapping/MAMMALS_TERRESTRIAL_ONLY.shp $(fname) -where "binomial LIKE '$(host)'" -ts 400, 200`
         run(query)
     end
-    mp = SimpleSDMLayers.raster(SimpleSDMResponse, IUCNRange(), fname)
-    ranges[host] = mp
-    mp = nothing
+    #mp = SimpleSDMLayers.raster(SimpleSDMResponse, IUCNRange(), fname)
+    #ranges[host] = mp
+    #mp = nothing
     GC.gc()
 end
 
@@ -66,17 +74,17 @@ for (i, tax) in enumerate(keys(ranges))
     @info tax
     istax = isequal(tax)
     sp_occ = findall(!isnothing, ranges[tax].grid)
-    Y_host[indexin(sp_occ, patches),i] .= 1
+    Y_host[indexin(sp_occ, patches), i] .= 1
     vir_pos_clover = indexin([x.from for x in filter(t -> istax(t.to), int_clover)], viruses)
     vir_pos_trefle = indexin([x.from for x in filter(t -> istax(t.to), int_trefle)], viruses)
-    Y_clover[indexin(sp_occ, patches),findall(t -> istax(t.to), int_clover)] .= 1
-    Y_virus_clover[indexin(sp_occ, patches),vir_pos] .= 1
+    Y_clover[indexin(sp_occ, patches), findall(t -> istax(t.to), int_clover)] .= 1
+    Y_virus_clover[indexin(sp_occ, patches), vir_pos] .= 1
 end
 
 function LCBD(Y)
-    S = (Y .- mean(Y; dims=1)).^2.0
+    S = (Y .- mean(Y; dims=1)) .^ 2.0
     SStotal = sum(S)
-    BDtotal = SStotal / (size(Y,1)-1)
+    BDtotal = SStotal / (size(Y, 1) - 1)
     SSj = sum(S; dims=1)
     SCBDj = SSj ./ SStotal
     SSi = sum(S; dims=2)
@@ -100,13 +108,13 @@ p1 = heatmap(lcbd_host, frame=:box, legend=false)
 p2 = heatmap(lcbd_virus, frame=:box, legend=false)
 p3 = heatmap(lcbd_clover, frame=:box, legend=false)
 for p in [p1, p2]
-    yaxis!(p, (-60,90), "Latitude")
-    xaxis!(p, (-180,180), "Longitude")
+    yaxis!(p, (-60, 90), "Latitude")
+    xaxis!(p, (-180, 180), "Longitude")
 end
 title!(p1, "Hosts")
 title!(p2, "Viruses")
 
-plot(p1, p2, layout=(2,1), size=(400,600))
+plot(p1, p2, layout=(2, 1), size=(400, 600))
 savefig("lcbd_species.png")
 
 #=
