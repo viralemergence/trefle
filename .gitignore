@@ -38,3 +38,5 @@ mapping/MAMMALS*
 mapping/assets
 mapping/rasters/*.tif
 mapping/analysis/*
+
+assets/

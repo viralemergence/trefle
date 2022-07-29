@@ -55,22 +55,64 @@ for host in hosts
                     `
             run(query)
             if iszero(filesize(fname))
-                rm(fname)                
-            else
-                mp = SimpleSDMLayers.geotiff(SimpleSDMPredictor, fname, 1)
-                replace!(mp.grid, zero(eltype(mp)) => nothing)
-                ranges[host] = mp
-                mp = nothing
+                rm(fname)
             end
-            GC.gc()
         catch e
             @info "nope"
+        end
+    else
+        if ~iszero(filesize(fname))
+            mp = SimpleSDMLayers.geotiff(SimpleSDMPredictor, fname, 1)
+            replace!(mp.grid, zero(eltype(mp)) => nothing)
+            mp.grid[findall(v -> ~isnothing(v), mp.grid)] .= one(eltype(mp))
+            ranges[host] = mp
+            mp = nothing
+        end
+    end
+    GC.gc()
+end
+
+
+# Make a mask to remove fully open water pixels
+msk = convert(Bool, similar(ranges[first(keys(ranges))]))
+msk.grid[:, :] .= nothing
+lc = SimpleSDMPredictor(EarthEnv, LandCover, 12)
+for lat in latitudes(msk)
+    for lon in longitudes(msk)
+        try
+            tlc = clip(lc; left=lon - 1.001stride(msk, 1), right=lon + 1.001stride(msk, 1), bottom=lat - 1.001stride(msk, 2), top=lat + 1.001stride(msk, 2))
+            if ~all(isequal(100), tlc.grid)
+                msk[lon, lat] = true
+            end
+        catch e
+        end
+        if lat + stride(msk,2) <= lc.bottom
+            msk[lon,lat] = nothing
+        end
+        if lon + stride(msk, 1) >= lc.right
+            msk[lon, lat] = nothing
         end
     end
 end
 
+maskedranges = Dict([s => mask(msk, ranges[s]) for s in keys(ranges)])
+
+ric = similar(ranges[first(keys(maskedranges))])
+for (k, v) in maskedranges
+    for i in findall(!isnothing, v.grid)
+        if isnothing(ric.grid[i])
+            ric.grid[i] = 1
+        else
+            ric.grid[i] += 1
+        end
+    end
+end
+
+ric = convert(Float64, ric)
+plot(ric)
+
 # LCDB / SCBD
-patches = findall(!isnothing, ric.grid)
+patches = findall(!isnothing, msk.grid)
 
 # Them chonky bois are sparse
 Y_host = spzeros(Int64, length(patches), length(hosts))
