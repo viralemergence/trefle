@@ -54,11 +54,11 @@ for host in hosts
                         $(fname)
                     `
             run(query)
-            if iszero(filesize(fname))
-                rm(fname)
-            end
         catch e
             @info "nope"
+        end
+        if iszero(filesize(fname))
+            rm(fname)
         end
     else
         if ~iszero(filesize(fname))
@@ -71,7 +71,6 @@ for host in hosts
     end
     GC.gc()
 end
-
 
 # Make a mask to remove fully open water pixels
 msk = convert(Bool, similar(ranges[first(keys(ranges))]))
