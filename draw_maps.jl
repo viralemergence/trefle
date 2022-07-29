@@ -48,7 +48,7 @@ for host in hosts
                         -l "MAMMALS"
                         -where "binomial = '$(host)'"
                         -a presence
-                        -ts 800 400
+                        -ts 300 150
                         -ot Byte
                         mapping/MAMMALS/MAMMALS.shp
                         $(fname)
@@ -86,8 +86,8 @@ for lat in latitudes(msk)
             end
         catch e
         end
-        if lat + stride(msk,2) <= lc.bottom
-            msk[lon,lat] = nothing
+        if lat + stride(msk, 2) <= lc.bottom
+            msk[lon, lat] = nothing
         end
         if lon + stride(msk, 1) >= lc.right
             msk[lon, lat] = nothing
@@ -108,31 +108,49 @@ for (k, v) in maskedranges
     end
 end
 
-ric = convert(Float64, ric)
-plot(ric)
+richness = convert(Float64, ric)
+plot(richness, frame=:box)
 
 # LCDB / SCBD
-patches = findall(!isnothing, msk.grid)
+@info "Finding the occupied patches"
+patches = findall(!isnothing, richness.grid)
 
-# Them chonky bois are sparse
+# Them chonky bois are not sparse anymore because beluga is our strong, robust son
+@info "Allocating the arrays for LCBD"
 Y_host = spzeros(Int64, length(patches), length(hosts))
 Y_virus_clover = spzeros(Int64, length(patches), length(viruses))
 Y_clover = spzeros(Int64, length(patches), links(CLOVER))
 Y_virus_trefle = spzeros(Int64, length(patches), length(viruses))
 Y_trefle = spzeros(Int64, length(patches), links(TREFLE))
 
+@info "Collecting interactions"
 int_trefle = interactions(TREFLE)
 int_clover = interactions(CLOVER)
 
-for (i, tax) in enumerate(keys(ranges))
-    @info tax
-    istax = isequal(tax)
-    sp_occ = findall(!isnothing, ranges[tax].grid)
-    Y_host[indexin(sp_occ, patches), i] .= 1
-    vir_pos_clover = indexin([x.from for x in filter(t -> istax(t.to), int_clover)], viruses)
-    vir_pos_trefle = indexin([x.from for x in filter(t -> istax(t.to), int_trefle)], viruses)
-    Y_clover[indexin(sp_occ, patches), findall(t -> istax(t.to), int_clover)] .= 1
-    Y_virus_clover[indexin(sp_occ, patches), vir_pos] .= 1
+@info "Preparing a list of species"
+sp = collect(keys(ranges))
+
+@info "Filling the LCBD arrays"
+Threads.@threads for i in 1:length(sp)
+    tax = sp[i]
+    try
+        istax = isequal(tax)
+        sp_occ = findall(!isnothing, ranges[tax].grid)
+        Y_host[indexin(sp_occ, patches), i] .= 1
+        vir_pos_clover = indexin([x.from for x in filter(t -> istax(t.to), int_clover)], viruses)
+        vir_pos_trefle = indexin([x.from for x in filter(t -> istax(t.to), int_trefle)], viruses)
+        Y_clover[indexin(sp_occ, patches), findall(t -> istax(t.to), int_clover)] .= 1
+        Y_trefle[indexin(sp_occ, patches), findall(t -> istax(t.to), int_trefle)] .= 1
+        Y_virus_clover[indexin(sp_occ, patches), vir_pos_clover] .= 1
+        Y_virus_trefle[indexin(sp_occ, patches), vir_pos_trefle] .= 1
+    catch e
+    end
+end
+
+@info "Declaring LCBD functions"
+function hellinger(Y::Matrix{T}) where {T<:Number}
+    yi = sum(Y; dims=2)
+    return sqrt.(Y ./ yi)
 end
 
 function LCBD(Y)
@@ -146,30 +164,47 @@ function LCBD(Y)
     return LCBDi, SCBDj, BDtotal
 end
 
-LCBD(Yhost)
-LCBD(Yvirus)
-LCBD(Yint)
-
+# Raw version
+@info "Pre-allocating response layers"
 lcbd_host = similar(ranges[first(hosts)])
-lcbd_virus = similar(ranges[first(hosts)])
+lcbd_virus_clover = similar(ranges[first(hosts)])
+lcbd_virus_trefle = similar(ranges[first(hosts)])
 lcbd_clover = similar(ranges[first(hosts)])
+lcbd_trefle = similar(ranges[first(hosts)])
 
-lcbd_host.grid[patches] = LCBD(Yhost)[1]
-lcbd_virus.grid[patches] = LCBD(Yvirus)[1]
-lcbd_clover.grid[patches] = LCBD(Yclover)[1]
+lcbd_host.grid[patches] = LCBD(Y_host)[1]
+lcbd_virus_clover.grid[patches] = LCBD(Y_virus_clover)[1]
+lcbd_virus_trefle.grid[patches] = LCBD(Y_virus_trefle)[1]
+lcbd_clover.grid[patches] = LCBD(Y_clover)[1]
+lcbd_trefle.grid[patches] = LCBD(Y_trefle)[1]
 
-p1 = heatmap(lcbd_host, frame=:box, legend=false)
-p2 = heatmap(lcbd_virus, frame=:box, legend=false)
-p3 = heatmap(lcbd_clover, frame=:box, legend=false)
-for p in [p1, p2]
-    yaxis!(p, (-60, 90), "Latitude")
-    xaxis!(p, (-180, 180), "Longitude")
-end
-title!(p1, "Hosts")
-title!(p2, "Viruses")
+@info "Saving response layers"
+SimpleSDMLayers.ascii(lcbd_host, "lcbd_host.ascii")
+SimpleSDMLayers.ascii(lcbd_virus_clover, "lcbd_virus_clover.ascii")
+SimpleSDMLayers.ascii(lcbd_virus_trefle, "lcbd_virus_trefle.ascii")
+SimpleSDMLayers.ascii(lcbd_clover, "lcbd_clover.ascii")
+SimpleSDMLayers.ascii(lcbd_trefle, "lcbd_trefle.ascii")
+SimpleSDMLayers.ascii(richness, "host_richness.ascii")
 
-plot(p1, p2, layout=(2, 1), size=(400, 600))
-savefig("lcbd_species.png")
+# Richness map
+@info "Viral richness maps"
+vr_clover = similar(richness)
+vr_trefle = similar(richness)
+
+vr_clover.grid[patches] = vec(sum(Y_virus_clover; dims=2))
+vr_trefle.grid[patches] = vec(sum(Y_virus_trefle; dims=2))
+
+SimpleSDMLayers.ascii(vr_clover, "viral_richness_clover.ascii")
+SimpleSDMLayers.ascii(vr_trefle, "viral_richness_trefle.ascii")
+
+CSV.write("lcbd_host.csv", filter(r -> !isnothing(r.values), DataFrame(lcbd_host)))
+CSV.write("lcbd_virus_clover.csv", filter(r -> !isnothing(r.values), DataFrame(lcbd_virus_clover)))
+CSV.write("lcbd_virus_trefle.csv", filter(r -> !isnothing(r.values), DataFrame(lcbd_virus_trefle)))
+CSV.write("lcbd_clover.csv", filter(r -> !isnothing(r.values), DataFrame(lcbd_clover)))
+CSV.write("lcbd_trefle.csv", filter(r -> !isnothing(r.values), DataFrame(lcbd_trefle)))
+CSV.write("richness_hosts.csv", filter(r -> !isnothing(r.values), DataFrame(richness)))
+CSV.write("richness_virus_clover.csv", filter(r -> !isnothing(r.values), DataFrame(vr_clover)))
+CSV.write("richness_virus_trefle.csv", filter(r -> !isnothing(r.values), DataFrame(vr_trefle)))
 
 #=
 ols = lm(@formula(Y ~ X), data)
