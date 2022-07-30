@@ -25,6 +25,8 @@ for (k, v) in ranges
     richness.grid[findall(!isnothing, v.grid)] .+= 1.0
 end
 
+plot(richness)
+
 # Viral richness
 trefle = DataFrame(CSV.File(joinpath(@__DIR__, "..", "artifacts", "trefle.csv")))
 clover = DataFrame(CSV.File(joinpath(@__DIR__, "..", "data", "clover.csv")))
