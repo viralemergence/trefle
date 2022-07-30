@@ -37,6 +37,12 @@ zTREFLE = simplify(TREFLE[collect(zoo_trefle), :])
 raster_path = joinpath(@__DIR__, "mapping", "rasters")
 ispath(raster_path) || mkdir(raster_path)
 
+# Path for the ICUN RedList MAMMALS folder
+iucn_path = get(ENV, "IUCN_PATH", nothing)
+if isnothing(iucn_path)
+    @error "You need an environmental variable `IUCN_PATH` pointing to the rangemaps"
+end
+
 # Get the predictors
 ranges = Dict{String,SimpleSDMPredictor}()
 for host in hosts

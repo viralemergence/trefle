@@ -37,6 +37,7 @@ wc5/alt_5m_bil.zip
 mapping/MAMMALS*
 mapping/assets
 mapping/rasters/*.tif
+mapping/cleaned_rasters/*.tif
 mapping/analysis/*
 
 assets/
