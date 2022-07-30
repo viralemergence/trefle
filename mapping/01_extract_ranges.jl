@@ -9,9 +9,7 @@ using ArchGDAL
 
 # Load the trefle / clover edgelists
 trefle = DataFrame(CSV.File(joinpath(@__DIR__, "..", "artifacts", "trefle.csv")))
-clover = DataFrame(CSV.File(joinpath(@__DIR__, "..", "data", "clover.csv")))
 hosts = unique(trefle.host)
-viruses = unique(trefle.virus)
 
 # Prepare a directory to store the rasters
 raster_path = joinpath(@__DIR__, "..", "mapping", "rasters")
@@ -35,7 +33,7 @@ end
 open_water = SimpleSDMPredictor(EarthEnv, LandCover, 12)
 
 # Read the layers
-for host in hosts[1:5]
+for host in hosts[6:10]
     @info "Rasterizing $(host)"
     host_path = joinpath(raster_path, replace(host, " " => "_") * ".tif")
     if ~isfile(host_path)
@@ -72,8 +70,11 @@ range_ref = geotiff(SimpleSDMPredictor, first_raster)
 coerced = nukepix(open_water, range_ref, g -> ~all(g.grid .== 100))
 replace!(coerced.grid, false => nothing)
 
+# Save the mask
+geotiff(joinpath(@__DIR__, "mask.tif"), convert(Float64, coerced))
+
 # Cleanup the rasterized data
-for layer in readdir(raster_path)
+for layer in filter(endswith(".tif"), readdir(raster_path))
     this_raster = joinpath(raster_path, layer)
     @info "Cleaning up $(layer)"
     if ~iszero(filesize(this_raster))
@@ -81,5 +82,7 @@ for layer in readdir(raster_path)
         l.grid[findall(v -> ~isnothing(v), l.grid)] .= one(eltype(l))
         clean_layer = convert(Float64, mask(coerced, l))
         geotiff(joinpath(cleaned_raster_path, layer), clean_layer)
+    else
+        rm(this_raster)
     end
 end
