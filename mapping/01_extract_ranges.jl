@@ -7,9 +7,9 @@ using EcologicalNetworks
 import GDAL
 using ArchGDAL
 
-# Load the trefle / clover edgelists
+# Load the trefle edgelist to get the hosts
 trefle = DataFrame(CSV.File(joinpath(@__DIR__, "..", "artifacts", "trefle.csv")))
-hosts = unique(trefle.host)
+hosts = sort(unique(trefle.host))
 
 # Prepare a directory to store the rasters
 raster_path = joinpath(@__DIR__, "..", "mapping", "rasters")
@@ -33,7 +33,7 @@ end
 open_water = SimpleSDMPredictor(EarthEnv, LandCover, 12)
 
 # Read the layers
-for host in hosts[6:10]
+for host in hosts
     @info "Rasterizing $(host)"
     host_path = joinpath(raster_path, replace(host, " " => "_") * ".tif")
     if ~isfile(host_path)
@@ -65,7 +65,7 @@ function nukepix(reference::TR, target::TT, f) where {TR<:SimpleSDMLayer,TT<:Sim
 end
 
 # Make a mask from open water pixels
-first_raster = first(readdir(raster_path; join=true))
+first_raster = first(filter(endswith(".tif"), readdir(raster_path; join=true)))
 range_ref = geotiff(SimpleSDMPredictor, first_raster)
 coerced = nukepix(open_water, range_ref, g -> ~all(g.grid .== 100))
 replace!(coerced.grid, false => nothing)
@@ -79,7 +79,7 @@ for layer in filter(endswith(".tif"), readdir(raster_path))
     @info "Cleaning up $(layer)"
     if ~iszero(filesize(this_raster))
         l = geotiff(SimpleSDMPredictor, this_raster)
-        l.grid[findall(v -> ~isnothing(v), l.grid)] .= one(eltype(l))
+        l.grid[findall(!isnothing, l.grid)] .= one(eltype(l))
         clean_layer = convert(Float64, mask(coerced, l))
         geotiff(joinpath(cleaned_raster_path, layer), clean_layer)
     else
