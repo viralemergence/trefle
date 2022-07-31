@@ -1,10 +1,13 @@
 using SimpleSDMLayers
-using Plots
+using EcologicalNetworks
 
 using DataFrames
 import CSV
 
 using Statistics
+
+# Plots with spatial wrapping
+using GeoMakie, CairoMakie
 
 # Load the rasters
 ranges_path = joinpath(@__DIR__, "cleaned_rasters")
@@ -24,8 +27,6 @@ richness.grid[findall(!isnothing, richness.grid)] .= 0.0
 for (k, v) in ranges
     richness.grid[findall(!isnothing, v.grid)] .+= 1.0
 end
-
-plot(richness)
 
 # Viral richness
 trefle = DataFrame(CSV.File(joinpath(@__DIR__, "..", "artifacts", "trefle.csv")))
@@ -50,6 +51,57 @@ zoo_trefle = TREFLE[:, "Homo sapiens"]
 
 zCLOVER = simplify(CLOVER[collect(zoo_clover), :])
 zTREFLE = simplify(TREFLE[collect(zoo_trefle), :])
+
+# Number of zoonotic hosts/viruses
+zhc = geotiff(SimpleSDMResponse, joinpath(@__DIR__, "mask.tif"))
+zhc.grid[findall(!isnothing, zhc.grid)] .= 0.0
+zht = geotiff(SimpleSDMResponse, joinpath(@__DIR__, "mask.tif"))
+zht.grid[findall(!isnothing, zht.grid)] .= 0.0
+
+zhc_names = filter(s -> s in keys(ranges), species(zCLOVER; dims=2))
+for sp in zhc_names
+    zhc.grid[findall(!isnothing, ranges[sp].grid)] .+= 1.0
+end
+zht_names = filter(s -> s in keys(ranges), species(zTREFLE; dims=2))
+for sp in zht_names
+    zht.grid[findall(!isnothing, ranges[sp].grid)] .+= 1.0
+end
+
+zvc = geotiff(SimpleSDMResponse, joinpath(@__DIR__, "mask.tif"))
+zvc.grid[findall(!isnothing, zvc.grid)] .= 0.0
+zvt = geotiff(SimpleSDMResponse, joinpath(@__DIR__, "mask.tif"))
+zvt.grid[findall(!isnothing, zvt.grid)] .= 0.0
+for i in findall(!isnothing, richness)
+    if richness[i] > 0.0
+        pool = [k for (k, v) in ranges if !isnothing(v[i])]
+        # CLOVER
+        N = simplify(CLOVER[:, pool])
+        v = filter(x -> x in zoo_clover, species(N; dims=1))
+        zvc[i] = length(v)
+        # TREFLE
+        N = simplify(TREFLE[:, pool])
+        v = filter(x -> x in zoo_trefle, species(N; dims=1))
+        zvt[i] = length(v)
+    end
+end
+
+# Plot using GeoMakie
+_proj = "natearth"
+fig = Figure(resolution=(1100, 700))
+ga1 = GeoAxis(fig[1, 1]; dest="+proj=$(_proj)", coastlines=true, title="Zoonotic hosts pre-imputation\n\n")
+GeoMakie.surface!(ga1, longitudes(richness), latitudes(richness), transpose(replace(zhc.grid, nothing => NaN)); shading=false, interpolate=false, colormap=:lapaz)
+ga2 = GeoAxis(fig[1, 2]; dest="+proj=$(_proj)", coastlines=true, title="Hosts gained post-imputation\n\n")
+GeoMakie.surface!(ga2, longitudes(richness), latitudes(richness), transpose(replace((zht-zhc).grid, nothing => NaN)); shading=false, interpolate=false, colormap=:bamako)
+ga3 = GeoAxis(fig[2, 1]; dest="+proj=$(_proj)", coastlines=true, title="Zoonotic viruses pre-imputation\n\n")
+GeoMakie.surface!(ga3, longitudes(richness), latitudes(richness), transpose(replace(zvc.grid, nothing => NaN)); shading=false, interpolate=false, colormap=:lapaz)
+ga4 = GeoAxis(fig[2, 2]; dest="+proj=$(_proj)", coastlines=true, title="Viruses gained post-imputation\n\n")
+GeoMakie.surface!(ga4, longitudes(richness), latitudes(richness), transpose(replace((zvt-zvc).grid, nothing => NaN)); shading=false, interpolate=false, colormap=:bamako)
+datalims!(ga1)
+datalims!(ga2)
+datalims!(ga3)
+datalims!(ga4)
+fig
+save("zoo-map-draft.png", fig, px_per_unit=2)
 
 Y = zeros(Int64, length(richness), length(ranges))
 patches = findall(!isnothing, richness)
@@ -76,4 +128,3 @@ end
 
 host_lcbd = geotiff(SimpleSDMResponse, joinpath(@__DIR__, "mask.tif"))
 host_lcbd.grid[findall(!isnothing, host_lcbd.grid)] .= LCBD(Y)[1]
-plot(host_lcbd)
