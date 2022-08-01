@@ -54,9 +54,9 @@ for host in hosts
                         -l "MAMMALS"
                         -where "binomial = '$(host)'"
                         -a presence
-                        -ts 300 150
+                        -ts 360 180
                         -ot Byte
-                        mapping/MAMMALS/MAMMALS.shp
+                        $(iucn_path)/MAMMALS/MAMMALS.shp
                         $(fname)
                     `
             run(query)
