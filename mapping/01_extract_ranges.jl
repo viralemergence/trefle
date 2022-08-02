@@ -33,7 +33,7 @@ end
 open_water = SimpleSDMPredictor(EarthEnv, LandCover, 12)
 
 # Read the layers
-for host in sort(hosts)[1:10]
+for host in sort(hosts)
     @info "Rasterizing $(host)"
     host_path = joinpath(raster_path, replace(host, " " => "_") * ".tif")
     if ~isfile(host_path)
@@ -66,13 +66,12 @@ function nukepix(reference::TR, target::TT, f) where {TR<:SimpleSDMLayer,TT<:Sim
     coerced = SimpleSDMResponse(zeros(Bool, size(target)), target)
     for k in keys(coerced)
         box = (
-            left = k[1] - 0.99stride(reference,1),
-            right = k[1] + 0.99stride(reference, 1),
-            bottom = k[2] - 0.99stride(reference, 2),
-            top = k[2] + 0.99stride(reference, 2)
+            left = k[1] - stride(target,1),
+            right = k[1] + stride(target, 1),
+            bottom = k[2] - stride(target, 2),
+            top = k[2] + stride(target, 2)
         )
         c = clip(reference; box...)
-        @info c
         coerced[k] = f(c)
     end
     return coerced
