@@ -41,3 +41,6 @@ mapping/cleaned_rasters/*.tif
 mapping/analysis/*
 
 assets/
+
+# No qGIS intermediate files
+*.aux.xml

@@ -33,7 +33,7 @@ end
 open_water = SimpleSDMPredictor(EarthEnv, LandCover, 12)
 
 # Read the layers
-for host in hosts
+for host in sort(hosts)[1:10]
     @info "Rasterizing $(host)"
     host_path = joinpath(raster_path, replace(host, " " => "_") * ".tif")
     if ~isfile(host_path)
@@ -43,7 +43,7 @@ for host in hosts
                 -where "binomial = '$(host)'"
                 -a presence
                 -te $(open_water.left) $(open_water.bottom) $(open_water.right) $(open_water.top)
-                -ts 200 100
+                -ts 360 180
                 -ot Byte
                 -add
                 $(joinpath(iucn_path, "MAMMALS", "MAMMALS.shp"))
@@ -53,13 +53,27 @@ for host in hosts
             print(err)
         end
     end
+    # Cleanup if the file is empty (no data)
+    if ~isfile(host_path)
+        if iszero(filesize(host_path))
+            rm(host_path)
+        end
+    end
 end
 
 # Function to coerce the data from a layer to the other
 function nukepix(reference::TR, target::TT, f) where {TR<:SimpleSDMLayer,TT<:SimpleSDMLayer}
     coerced = SimpleSDMResponse(zeros(Bool, size(target)), target)
     for k in keys(coerced)
-        coerced[k] = f(clip(reference, k .- stride(reference), k .+ stride(reference)))
+        box = (
+            left = k[1] - 0.99stride(reference,1),
+            right = k[1] + 0.99stride(reference, 1),
+            bottom = k[2] - 0.99stride(reference, 2),
+            top = k[2] + 0.99stride(reference, 2)
+        )
+        c = clip(reference; box...)
+        @info c
+        coerced[k] = f(c)
     end
     return coerced
 end
@@ -67,7 +81,7 @@ end
 # Make a mask from open water pixels
 first_raster = first(filter(endswith(".tif"), readdir(raster_path; join=true)))
 range_ref = geotiff(SimpleSDMPredictor, first_raster)
-coerced = nukepix(open_water, range_ref, g -> ~all(g.grid .== 100))
+coerced = nukepix(open_water, range_ref, extent -> ~all(extent.grid .== 100))
 replace!(coerced.grid, false => nothing)
 
 # Save the mask
