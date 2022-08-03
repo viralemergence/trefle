@@ -145,13 +145,44 @@ begin
 end
 save(joinpath(@__DIR__, "..", "figures", "richness-pre-post.png"), fig, px_per_unit=2)
 
-Y = zeros(Int64, length(richness), length(ranges))
-patches = findall(!isnothing, richness)
-for (i, r) in enumerate(ranges)
-    idx = indexin(findall(!isnothing, r.second), patches)
-    Y[idx, i] .= 1
+# LCDB / SCBD
+@info "Finding the occupied patches"
+patches = findall(!isnothing, richness.grid)
+
+# Them chonky bois are not sparse anymore because beluga is our strong, robust son
+@info "Allocating the arrays for LCBD"
+Y_host = zeros(Int64, length(patches), length(hosts))
+Y_virus_clover = zeros(Int64, length(patches), length(viruses))
+Y_clover = zeros(Int64, length(patches), links(CLOVER))
+Y_virus_trefle = zeros(Int64, length(patches), length(viruses))
+Y_trefle = zeros(Int64, length(patches), links(TREFLE))
+
+@info "Collecting interactions"
+int_trefle = EcologicalNetworks.interactions(TREFLE)
+int_clover = EcologicalNetworks.interactions(CLOVER)
+
+@info "Preparing a list of species"
+sp = collect(keys(ranges))
+
+@info "Filling the LCBD arrays"
+for i in 1:length(sp)
+    tax = sp[i]
+    @info tax
+    try
+        istax = isequal(tax)
+        sp_occ = findall(!isnothing, ranges[tax].grid)
+        Y_host[indexin(sp_occ, patches), i] .= 1
+        vir_pos_clover = indexin([x.from for x in filter(t -> istax(t.to), int_clover)], viruses)
+        vir_pos_trefle = indexin([x.from for x in filter(t -> istax(t.to), int_trefle)], viruses)
+        Y_clover[indexin(sp_occ, patches), findall(t -> istax(t.to), int_clover)] .= 1
+        Y_trefle[indexin(sp_occ, patches), findall(t -> istax(t.to), int_trefle)] .= 1
+        Y_virus_clover[indexin(sp_occ, patches), vir_pos_clover] .= 1
+        Y_virus_trefle[indexin(sp_occ, patches), vir_pos_trefle] .= 1
+    catch e
+    end
 end
 
+@info "Declaring LCBD functions"
 function hellinger(Y::Matrix{T}) where {T<:Number}
     yi = sum(Y; dims=2)
     return sqrt.(Y ./ yi)
@@ -168,12 +199,22 @@ function LCBD(Y)
     return LCBDi, SCBDj, BDtotal
 end
 
-host_lcbd = emptyraster()
-host_lcbd.grid[findall(!isnothing, host_lcbd.grid)] .= LCBD(Y)[1]
 
-# LCBD maps
+# Raw version
+@info "Pre-allocating response layers"
+lcbd_host = emptyraster()
+lcbd_virus_clover = emptyraster()
+lcbd_virus_trefle = emptyraster()
+lcbd_clover = emptyraster()
+lcbd_trefle = emptyraster()
 
+lcbd_host.grid[patches] = LCBD(Y_host)[1]
+lcbd_virus_clover.grid[patches] = LCBD(Y_virus_clover)[1]
+lcbd_virus_trefle.grid[patches] = LCBD(Y_virus_trefle)[1]
+lcbd_clover.grid[patches] = LCBD(Y_clover)[1]
+lcbd_trefle.grid[patches] = LCBD(Y_trefle)[1]
 
+@info "Plotting"
 begin
     _proj = "natearth2"
     _coast = true
