@@ -122,22 +122,23 @@ patches = findall(!isnothing, richness.grid)
 
 # Them chonky bois are not sparse anymore because beluga is our strong, robust son
 @info "Allocating the arrays for LCBD"
-Y_host = spzeros(Int64, length(patches), length(hosts))
-Y_virus_clover = spzeros(Int64, length(patches), length(viruses))
-Y_clover = spzeros(Int64, length(patches), links(CLOVER))
-Y_virus_trefle = spzeros(Int64, length(patches), length(viruses))
-Y_trefle = spzeros(Int64, length(patches), links(TREFLE))
+Y_host = zeros(Int64, length(patches), length(hosts))
+Y_virus_clover = zeros(Int64, length(patches), length(viruses))
+Y_clover = zeros(Int64, length(patches), links(CLOVER))
+Y_virus_trefle = zeros(Int64, length(patches), length(viruses))
+Y_trefle = zeros(Int64, length(patches), links(TREFLE))
 
 @info "Collecting interactions"
-int_trefle = interactions(TREFLE)
-int_clover = interactions(CLOVER)
+int_trefle = EcologicalNetworks.interactions(TREFLE)
+int_clover = EcologicalNetworks.interactions(CLOVER)
 
 @info "Preparing a list of species"
 sp = collect(keys(ranges))
 
 @info "Filling the LCBD arrays"
-Threads.@threads for i in 1:length(sp)
+for i in 1:length(sp)
     tax = sp[i]
+    @info tax
     try
         istax = isequal(tax)
         sp_occ = findall(!isnothing, ranges[tax].grid)

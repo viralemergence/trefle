@@ -107,7 +107,7 @@ end
 begin
     _proj = "natearth2"
     _coast = true
-    _pal_known = Reverse(:linear_gow_65_90_c35_n256)
+    _pal_known = :linear_wcmr_100_45_c42_n256
     _pal_gained = :linear_worb_100_25_c53_n256
     _pal_divergence = :diverging_gwv_55_95_c39_n256
 
@@ -129,11 +129,11 @@ begin
     ga5 = GeoAxis(fig[3, 2]; dest="+proj=$(_proj)", coastlines=_coast, title="E", subtitle="Hotspots of interaction gain\n\n", titlealign=:left, subtitlecolor=:gray20)
     pl5 = GeoMakie.surface!(ga5, sprinkle(_hotspots)...; shading=false, interpolate=false, colormap=_pal_divergence, colorrange=(-0.3, 0.3))
 
-    cb1 = Colorbar(fig[1, 1], pl1; height=Relative(0.75))
-    cb2 = Colorbar(fig[1, 4], pl2; height=Relative(0.75))
-    cb3 = Colorbar(fig[2, 1], pl3; height=Relative(0.75))
-    cb4 = Colorbar(fig[2, 4], pl4; height=Relative(0.75))
-    cb5 = Colorbar(fig[3, 1], pl5; height=Relative(0.75))
+    cb1 = Colorbar(fig[1, 1], pl1; height=Relative(0.45))
+    cb2 = Colorbar(fig[1, 4], pl2; height=Relative(0.45))
+    cb3 = Colorbar(fig[2, 1], pl3; height=Relative(0.45))
+    cb4 = Colorbar(fig[2, 4], pl4; height=Relative(0.45))
+    cb5 = Colorbar(fig[3, 1], pl5; height=Relative(0.45))
 
     datalims!(ga1)
     datalims!(ga2)
@@ -143,8 +143,7 @@ begin
 
     fig
 end
-
-save("zoo-map-draft.png", fig, px_per_unit=2)
+save(joinpath(@__DIR__, "..", "figures", "richness-pre-post.png"), fig, px_per_unit=2)
 
 Y = zeros(Int64, length(richness), length(ranges))
 patches = findall(!isnothing, richness)
@@ -171,3 +170,42 @@ end
 
 host_lcbd = emptyraster()
 host_lcbd.grid[findall(!isnothing, host_lcbd.grid)] .= LCBD(Y)[1]
+
+# LCBD maps
+
+
+begin
+    _proj = "natearth2"
+    _coast = true
+    _pal_known = :linear_wcmr_100_45_c42_n256
+    _pal_gained = :linear_worb_100_25_c53_n256
+    _pal_divergence = :diverging_gwv_55_95_c39_n256
+
+    fig = Figure(resolution=(1100, 520))
+
+    ga1 = GeoAxis(fig[1, 2]; dest="+proj=$(_proj)", coastlines=_coast, title="A", subtitle="Network uniqueness pre-imputation\n\n", titlealign=:left, subtitlecolor=:gray20)
+    pl1 = GeoMakie.surface!(ga1, sprinkle(rescale(lcbd_clover, (0, 1)))...; shading=false, interpolate=false, colormap=_pal_known)
+
+    ga2 = GeoAxis(fig[1, 3]; dest="+proj=$(_proj)", coastlines=_coast, title="B", subtitle="Network uniqueness post-imputation\n\n", titlealign=:left, subtitlecolor=:gray20)
+    pl2 = GeoMakie.surface!(ga2, sprinkle(rescale(lcbd_trefle, (0, 1)))...; shading=false, interpolate=false, colormap=_pal_known)
+
+    _hotspots = rescale(lcbd_trefle, (0, 1)) - rescale(lcbd_clover, (0, 1))
+    ga3 = GeoAxis(fig[2, 2]; dest="+proj=$(_proj)", coastlines=_coast, title="C", subtitle="Hotspots of uniqueness gain\n\n", titlealign=:left, subtitlecolor=:gray20)
+    pl3 = GeoMakie.surface!(ga3, sprinkle(_hotspots)...; shading=false, interpolate=false, colormap=_pal_divergence, colorrange=(-0.3, 0.3))
+
+    ga4 = GeoAxis(fig[2, 3]; dest="+proj=$(_proj)", coastlines=_coast, title="D", subtitle="Host community uniqueness\n\n", titlealign=:left, subtitlecolor=:gray20)
+    pl4 = GeoMakie.surface!(ga4, sprinkle(rescale(lcbd_host, (0, 1)))...; shading=false, interpolate=false, colormap=_pal_known)
+
+    cb1 = Colorbar(fig[1, 1], pl1; height=Relative(0.45))
+    cb2 = Colorbar(fig[1, 4], pl2; height=Relative(0.45))
+    cb3 = Colorbar(fig[2, 1], pl3; height=Relative(0.45))
+    cb4 = Colorbar(fig[2, 4], pl4; height=Relative(0.45))
+
+    datalims!(ga1)
+    datalims!(ga2)
+    datalims!(ga3)
+    datalims!(ga4)
+
+    fig
+end
+save(joinpath(@__DIR__, "..", "figures", "lcbd-pre-post.png"), fig, px_per_unit=2)
