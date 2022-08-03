@@ -21,9 +21,14 @@ end
 # Layer of rasters
 ranges = Dict([file_to_key(f) => geotiff(SimpleSDMPredictor, joinpath(ranges_path, f)) for f in ranges_rasters])
 
+function emptyraster()
+    rast = geotiff(SimpleSDMResponse, joinpath(@__DIR__, "mask.tif"))
+    rast.grid[findall(!isnothing, rast.grid)] .= 0.0
+    return rast
+end
+
 # Richness (hosts)
-richness = geotiff(SimpleSDMResponse, joinpath(@__DIR__, "mask.tif"))
-richness.grid[findall(!isnothing, richness.grid)] .= 0.0
+richness = emptyraster()
 for (k, v) in ranges
     richness.grid[findall(!isnothing, v.grid)] .+= 1.0
 end
@@ -52,11 +57,21 @@ zoo_trefle = TREFLE[:, "Homo sapiens"]
 zCLOVER = simplify(CLOVER[collect(zoo_clover), :])
 zTREFLE = simplify(TREFLE[collect(zoo_trefle), :])
 
-# Number of zoonotic hosts/viruses
-zhc = geotiff(SimpleSDMResponse, joinpath(@__DIR__, "mask.tif"))
-zhc.grid[findall(!isnothing, zhc.grid)] .= 0.0
-zht = geotiff(SimpleSDMResponse, joinpath(@__DIR__, "mask.tif"))
-zht.grid[findall(!isnothing, zht.grid)] .= 0.0
+# Number of zoonotic hosts
+zhc = emptyraster()
+zht = emptyraster()
+
+# Number of zoonotic viruses
+zvc = emptyraster()
+zvt = emptyraster()
+
+# Number of viruses
+avc = emptyraster()
+avt = emptyraster()
+
+# Number of interactions
+inc = emptyraster()
+int = emptyraster()
 
 zhc_names = filter(s -> s in keys(ranges), species(zCLOVER; dims=2))
 for sp in zhc_names
@@ -67,36 +82,68 @@ for sp in zht_names
     zht.grid[findall(!isnothing, ranges[sp].grid)] .+= 1.0
 end
 
-zvc = geotiff(SimpleSDMResponse, joinpath(@__DIR__, "mask.tif"))
-zvc.grid[findall(!isnothing, zvc.grid)] .= 0.0
-zvt = geotiff(SimpleSDMResponse, joinpath(@__DIR__, "mask.tif"))
-zvt.grid[findall(!isnothing, zvt.grid)] .= 0.0
 for i in findall(!isnothing, richness)
     if richness[i] > 0.0
+        # Hosts at this location
         pool = [k for (k, v) in ranges if !isnothing(v[i])]
         # CLOVER
         N = simplify(CLOVER[:, pool])
-        v = filter(x -> x in zoo_clover, species(N; dims=1))
-        zvc[i] = length(v)
+        zvc[i] = count(x -> x in zoo_clover, species(N; dims=1))
+        avc[i] = EcologicalNetworks.richness(N; dims=1)
+        inc[i] = links(N)
         # TREFLE
         N = simplify(TREFLE[:, pool])
-        v = filter(x -> x in zoo_trefle, species(N; dims=1))
-        zvt[i] = length(v)
+        zvt[i] = count(x -> x in zoo_trefle, species(N; dims=1))
+        avt[i] = EcologicalNetworks.richness(N; dims=1)
+        int[i] = links(N)
     end
 end
 
+function sprinkle(layer::T) where {T<:SimpleSDMLayer}
+    return (longitudes(layer), latitudes(layer), transpose(replace(layer.grid, nothing => NaN)))
+end
+
 # Plot using GeoMakie
-_proj = "natearth"
-fig = Figure(resolution=(900, 700))
-ga1 = GeoAxis(fig[1, 2]; dest="+proj=$(_proj)", coastlines=true, title="Zoonotic hosts pre-imputation\n\n")
-pl1 = GeoMakie.surface!(ga1, longitudes(richness), latitudes(richness), transpose(replace(zhc.grid, nothing => NaN)); shading=false, interpolate=false, colormap=:linear_wcmr_100_45_c42_n256)
-ga2 = GeoAxis(fig[2, 2]; dest="+proj=$(_proj)", coastlines=true, title="Zoonotic hosts gained post-imputation\n\n")
-pl2 = GeoMakie.surface!(ga2, longitudes(richness), latitudes(richness), transpose(replace((zht - zhc).grid, nothing => NaN)); shading=false, interpolate=false, colormap=:linear_worb_100_25_c53_n256)
-cb1 = Colorbar(fig[1, 1], pl1; height=Relative(0.55))
-cb2 = Colorbar(fig[2, 3], pl2; height=Relative(0.55))
-datalims!(ga1)
-datalims!(ga2)
-fig
+begin
+    _proj = "natearth2"
+    _coast = true
+    _pal_known = Reverse(:linear_gow_65_90_c35_n256)
+    _pal_gained = :linear_worb_100_25_c53_n256
+    _pal_divergence = :diverging_gwv_55_95_c39_n256
+
+    fig = Figure(resolution=(1100, 780))
+
+    ga1 = GeoAxis(fig[1, 2]; dest="+proj=$(_proj)", coastlines=_coast, title="A", subtitle="Known zoonotic hosts\n\n", titlealign=:left, subtitlecolor=:gray20)
+    pl1 = GeoMakie.surface!(ga1, sprinkle(zhc)...; shading=false, interpolate=false, colormap=_pal_known)
+
+    ga2 = GeoAxis(fig[1, 3]; dest="+proj=$(_proj)", coastlines=_coast, title="B", subtitle="Predicted new zoonotic hosts\n\n", titlealign=:left, subtitlecolor=:gray20)
+    pl2 = GeoMakie.surface!(ga2, sprinkle(zht - zhc)...; shading=false, interpolate=false, colormap=_pal_gained)
+
+    ga3 = GeoAxis(fig[2, 2]; dest="+proj=$(_proj)", coastlines=_coast, title="C", subtitle="Known interactions\n\n", titlealign=:left, subtitlecolor=:gray20)
+    pl3 = GeoMakie.surface!(ga3, sprinkle(inc)...; shading=false, interpolate=false, colormap=_pal_known)
+
+    ga4 = GeoAxis(fig[2, 3]; dest="+proj=$(_proj)", coastlines=_coast, title="D", subtitle="Predicted new interactions\n\n", titlealign=:left, subtitlecolor=:gray20)
+    pl4 = GeoMakie.surface!(ga4, sprinkle(int - inc)...; shading=false, interpolate=false, colormap=_pal_gained)
+
+    _hotspots = rescale(int - inc, (0, 1)) - rescale(richness, (0, 1))
+    ga5 = GeoAxis(fig[3, 2]; dest="+proj=$(_proj)", coastlines=_coast, title="E", subtitle="Hotspots of interaction gain\n\n", titlealign=:left, subtitlecolor=:gray20)
+    pl5 = GeoMakie.surface!(ga5, sprinkle(_hotspots)...; shading=false, interpolate=false, colormap=_pal_divergence, colorrange=(-0.3, 0.3))
+
+    cb1 = Colorbar(fig[1, 1], pl1; height=Relative(0.75))
+    cb2 = Colorbar(fig[1, 4], pl2; height=Relative(0.75))
+    cb3 = Colorbar(fig[2, 1], pl3; height=Relative(0.75))
+    cb4 = Colorbar(fig[2, 4], pl4; height=Relative(0.75))
+    cb5 = Colorbar(fig[3, 1], pl5; height=Relative(0.75))
+
+    datalims!(ga1)
+    datalims!(ga2)
+    datalims!(ga3)
+    datalims!(ga4)
+    datalims!(ga5)
+
+    fig
+end
+
 save("zoo-map-draft.png", fig, px_per_unit=2)
 
 Y = zeros(Int64, length(richness), length(ranges))
@@ -122,5 +169,5 @@ function LCBD(Y)
     return LCBDi, SCBDj, BDtotal
 end
 
-host_lcbd = geotiff(SimpleSDMResponse, joinpath(@__DIR__, "mask.tif"))
+host_lcbd = emptyraster()
 host_lcbd.grid[findall(!isnothing, host_lcbd.grid)] .= LCBD(Y)[1]
