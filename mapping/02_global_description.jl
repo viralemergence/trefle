@@ -109,37 +109,43 @@ begin
     _coast = true
     _pal_known = :linear_wcmr_100_45_c42_n256
     _pal_gained = :linear_worb_100_25_c53_n256
-    _pal_divergence = :diverging_gwv_55_95_c39_n256
+    _pal_divergence = Reverse(:roma)
 
     fig = Figure(resolution=(1100, 780))
 
     ga1 = GeoAxis(fig[1, 2]; dest="+proj=$(_proj)", coastlines=_coast, title="A", subtitle="Known zoonotic hosts\n\n", titlealign=:left, subtitlecolor=:gray20)
     pl1 = GeoMakie.surface!(ga1, sprinkle(zhc)...; shading=false, interpolate=false, colormap=_pal_known)
 
-    ga2 = GeoAxis(fig[1, 3]; dest="+proj=$(_proj)", coastlines=_coast, title="B", subtitle="Predicted new zoonotic hosts\n\n", titlealign=:left, subtitlecolor=:gray20)
+    ga2 = GeoAxis(fig[2, 2]; dest="+proj=$(_proj)", coastlines=_coast, title="B", subtitle="Predicted new zoonotic hosts\n\n", titlealign=:left, subtitlecolor=:gray20)
     pl2 = GeoMakie.surface!(ga2, sprinkle(zht - zhc)...; shading=false, interpolate=false, colormap=_pal_gained)
 
-    ga3 = GeoAxis(fig[2, 2]; dest="+proj=$(_proj)", coastlines=_coast, title="C", subtitle="Known interactions\n\n", titlealign=:left, subtitlecolor=:gray20)
+    _hotspots = rescale(zht - zhc, (0, 1)) - rescale(richness, (0, 1))
+    ga6 = GeoAxis(fig[3, 2]; dest="+proj=$(_proj)", coastlines=_coast, title="C", subtitle="Hotspots of zoonotic hosts gain\n\n", titlealign=:left, subtitlecolor=:gray20)
+    pl6 = GeoMakie.surface!(ga6, sprinkle(_hotspots)...; shading=false, interpolate=false, colormap=_pal_divergence, colorrange=(-0.5, 0.5))
+
+    ga3 = GeoAxis(fig[1, 3]; dest="+proj=$(_proj)", coastlines=_coast, title="D", subtitle="Known interactions\n\n", titlealign=:left, subtitlecolor=:gray20)
     pl3 = GeoMakie.surface!(ga3, sprinkle(inc)...; shading=false, interpolate=false, colormap=_pal_known)
 
-    ga4 = GeoAxis(fig[2, 3]; dest="+proj=$(_proj)", coastlines=_coast, title="D", subtitle="Predicted new interactions\n\n", titlealign=:left, subtitlecolor=:gray20)
+    ga4 = GeoAxis(fig[2, 3]; dest="+proj=$(_proj)", coastlines=_coast, title="E", subtitle="Predicted new interactions\n\n", titlealign=:left, subtitlecolor=:gray20)
     pl4 = GeoMakie.surface!(ga4, sprinkle(int - inc)...; shading=false, interpolate=false, colormap=_pal_gained)
 
     _hotspots = rescale(int - inc, (0, 1)) - rescale(richness, (0, 1))
-    ga5 = GeoAxis(fig[3, 2]; dest="+proj=$(_proj)", coastlines=_coast, title="E", subtitle="Hotspots of interaction gain\n\n", titlealign=:left, subtitlecolor=:gray20)
-    pl5 = GeoMakie.surface!(ga5, sprinkle(_hotspots)...; shading=false, interpolate=false, colormap=_pal_divergence, colorrange=(-0.3, 0.3))
+    ga5 = GeoAxis(fig[3, 3]; dest="+proj=$(_proj)", coastlines=_coast, title="F", subtitle="Hotspots of interaction gain\n\n", titlealign=:left, subtitlecolor=:gray20)
+    pl5 = GeoMakie.surface!(ga5, sprinkle(_hotspots)...; shading=false, interpolate=false, colormap=_pal_divergence, colorrange=(-0.5, 0.5))
 
     cb1 = Colorbar(fig[1, 1], pl1; height=Relative(0.45))
-    cb2 = Colorbar(fig[1, 4], pl2; height=Relative(0.45))
-    cb3 = Colorbar(fig[2, 1], pl3; height=Relative(0.45))
+    cb2 = Colorbar(fig[2, 1], pl2; height=Relative(0.45))
+    cb6 = Colorbar(fig[3, 1], pl6; height=Relative(0.45))
+    cb3 = Colorbar(fig[1, 4], pl3; height=Relative(0.45))
     cb4 = Colorbar(fig[2, 4], pl4; height=Relative(0.45))
-    cb5 = Colorbar(fig[3, 1], pl5; height=Relative(0.45))
+    cb5 = Colorbar(fig[3, 4], pl5; height=Relative(0.45))
 
     datalims!(ga1)
     datalims!(ga2)
     datalims!(ga3)
     datalims!(ga4)
     datalims!(ga5)
+    datalims!(ga6)
 
     fig
 end
@@ -220,7 +226,7 @@ begin
     _coast = true
     _pal_known = :linear_wcmr_100_45_c42_n256
     _pal_gained = :linear_worb_100_25_c53_n256
-    _pal_divergence = :diverging_gwv_55_95_c39_n256
+    _pal_divergence = Reverse(:roma)
 
     fig = Figure(resolution=(1100, 520))
 
