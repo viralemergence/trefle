@@ -103,6 +103,9 @@ function sprinkle(layer::T) where {T<:SimpleSDMLayer}
     return (longitudes(layer), latitudes(layer), transpose(replace(layer.grid, nothing => NaN)))
 end
 
+logistic = (x) -> 1.0 / (1.0 + exp(-x))
+logit = (p) -> log(p / (1.0 - p))
+
 # Plot using GeoMakie
 begin
     _proj = "natearth2"
@@ -162,10 +165,14 @@ Y_virus_clover = zeros(Int64, length(patches), length(viruses))
 Y_clover = zeros(Int64, length(patches), links(CLOVER))
 Y_virus_trefle = zeros(Int64, length(patches), length(viruses))
 Y_trefle = zeros(Int64, length(patches), links(TREFLE))
+Y_zoo_clover = zeros(Int64, length(patches), links(zCLOVER))
+Y_zoo_trefle = zeros(Int64, length(patches), links(zTREFLE))
 
 @info "Collecting interactions"
 int_trefle = EcologicalNetworks.interactions(TREFLE)
 int_clover = EcologicalNetworks.interactions(CLOVER)
+int_z_trefle = EcologicalNetworks.interactions(zTREFLE)
+int_z_clover = EcologicalNetworks.interactions(zCLOVER)
 
 @info "Preparing a list of species"
 sp = collect(keys(ranges))
@@ -182,6 +189,8 @@ for i in 1:length(sp)
         vir_pos_trefle = indexin([x.from for x in filter(t -> istax(t.to), int_trefle)], viruses)
         Y_clover[indexin(sp_occ, patches), findall(t -> istax(t.to), int_clover)] .= 1
         Y_trefle[indexin(sp_occ, patches), findall(t -> istax(t.to), int_trefle)] .= 1
+        Y_zoo_clover[indexin(sp_occ, patches), findall(t -> istax(t.to), int_z_clover)] .= 1
+        Y_zoo_trefle[indexin(sp_occ, patches), findall(t -> istax(t.to), int_z_trefle)] .= 1
         Y_virus_clover[indexin(sp_occ, patches), vir_pos_clover] .= 1
         Y_virus_trefle[indexin(sp_occ, patches), vir_pos_trefle] .= 1
     catch e
@@ -213,12 +222,16 @@ lcbd_virus_clover = emptyraster()
 lcbd_virus_trefle = emptyraster()
 lcbd_clover = emptyraster()
 lcbd_trefle = emptyraster()
+lcbd_zoo_clover = emptyraster()
+lcbd_zoo_trefle = emptyraster()
 
 lcbd_host.grid[patches] = LCBD(Y_host)[1]
 lcbd_virus_clover.grid[patches] = LCBD(Y_virus_clover)[1]
 lcbd_virus_trefle.grid[patches] = LCBD(Y_virus_trefle)[1]
 lcbd_clover.grid[patches] = LCBD(Y_clover)[1]
 lcbd_trefle.grid[patches] = LCBD(Y_trefle)[1]
+lcbd_zoo_clover.grid[patches] = LCBD(Y_zoo_clover)[1]
+lcbd_zoo_trefle.grid[patches] = LCBD(Y_zoo_trefle)[1]
 
 @info "Plotting"
 begin
@@ -256,3 +269,40 @@ begin
     fig
 end
 save(joinpath(@__DIR__, "..", "figures", "lcbd-pre-post.png"), fig, px_per_unit=2)
+
+@info "Plotting supp"
+begin
+    _proj = "natearth2"
+    _coast = true
+    _pal_known = :linear_wcmr_100_45_c42_n256
+    _pal_gained = :linear_worb_100_25_c53_n256
+    _pal_divergence = Reverse(:roma)
+
+    fig = Figure(resolution=(1100, 520))
+
+    ga1 = GeoAxis(fig[1, 2]; dest="+proj=$(_proj)", coastlines=_coast, title="A", subtitle="Zoonotic network uniqueness pre-imputation\n\n", titlealign=:left, subtitlecolor=:gray20)
+    pl1 = GeoMakie.surface!(ga1, sprinkle(rescale(lcbd_zoo_clover, (0, 1)))...; shading=false, interpolate=false, colormap=_pal_known)
+
+    ga2 = GeoAxis(fig[1, 3]; dest="+proj=$(_proj)", coastlines=_coast, title="B", subtitle="Zoonotic network uniqueness post-imputation\n\n", titlealign=:left, subtitlecolor=:gray20)
+    pl2 = GeoMakie.surface!(ga2, sprinkle(rescale(lcbd_zoo_trefle, (0, 1)))...; shading=false, interpolate=false, colormap=_pal_known)
+
+    _hotspots = rescale(lcbd_zoo_trefle, (0, 1)) - rescale(lcbd_zoo_clover, (0, 1))
+    ga3 = GeoAxis(fig[2, 2]; dest="+proj=$(_proj)", coastlines=_coast, title="C", subtitle="Hotspots of zoonotic uniqueness gain\n\n", titlealign=:left, subtitlecolor=:gray20)
+    pl3 = GeoMakie.surface!(ga3, sprinkle(_hotspots)...; shading=false, interpolate=false, colormap=_pal_divergence, colorrange=(-0.3, 0.3))
+
+    #ga4 = GeoAxis(fig[2, 3]; dest="+proj=$(_proj)", coastlines=_coast, title="D", subtitle="Host community uniqueness\n\n", titlealign=:left, subtitlecolor=:gray20)
+    #pl4 = GeoMakie.surface!(ga4, sprinkle(rescale(lcbd_host, (0, 1)))...; shading=false, interpolate=false, colormap=_pal_known)
+
+    cb1 = Colorbar(fig[1, 1], pl1; height=Relative(0.45))
+    cb2 = Colorbar(fig[1, 4], pl2; height=Relative(0.45))
+    cb3 = Colorbar(fig[2, 1], pl3; height=Relative(0.45))
+    #cb4 = Colorbar(fig[2, 4], pl4; height=Relative(0.45))
+
+    datalims!(ga1)
+    datalims!(ga2)
+    datalims!(ga3)
+    #datalims!(ga4)
+
+    fig
+end
+save(joinpath(@__DIR__, "..", "figures", "lcbd-zoonotic.png"), fig, px_per_unit=2)
