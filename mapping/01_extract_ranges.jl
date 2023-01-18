@@ -8,15 +8,17 @@ import GDAL
 using ArchGDAL
 
 # Load the trefle edgelist to get the hosts
-trefle = DataFrame(CSV.File(joinpath(@__DIR__, "..", "artifacts", "trefle.csv")))
+trefle = DataFrame(CSV.File(joinpath(pwd(), "artifacts", "trefle.csv")))
 hosts = sort(unique(trefle.host))
 
 # Prepare a directory to store the rasters
-raster_path = joinpath(@__DIR__, "..", "mapping", "rasters")
+raster_path = joinpath(pwd(), "mapping", "rasters")
 isdir(raster_path) || mkdir(raster_path)
 
-cleaned_raster_path = joinpath(@__DIR__, "..", "mapping", "cleaned_rasters")
+cleaned_raster_path = joinpath(pwd(), "mapping", "cleaned_rasters")
 isdir(cleaned_raster_path) || mkdir(cleaned_raster_path)
+
+ENV["IUCN_PATH"] = joinpath(homedir(), "Downloads")
 
 # Prepare the IUCN data
 iucn_path = get(ENV, "IUCN_PATH", nothing)
@@ -40,10 +42,10 @@ for host in sort(hosts)
         try
             rasterize_query = `gdal_rasterize
                 -l "MAMMALS"
-                -where "binomial = '$(host)'"
+                -where "sci_name = '$(host)'"
                 -a presence
                 -te $(open_water.left) $(open_water.bottom) $(open_water.right) $(open_water.top)
-                -ts 360 180
+                -ts 400 200
                 -ot Byte
                 -add
                 $(joinpath(iucn_path, "MAMMALS", "MAMMALS.shp"))
