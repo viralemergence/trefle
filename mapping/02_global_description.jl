@@ -10,7 +10,7 @@ using Statistics
 using GeoMakie, CairoMakie
 
 # Load the rasters
-ranges_path = joinpath(@__DIR__, "cleaned_rasters")
+ranges_path = joinpath(pwd(), "mapping", "cleaned_rasters")
 ranges_rasters = filter(endswith(".tif"), readdir(ranges_path))
 
 # Transform the file path to a dictionary key
@@ -22,7 +22,7 @@ end
 ranges = Dict([file_to_key(f) => geotiff(SimpleSDMPredictor, joinpath(ranges_path, f)) for f in ranges_rasters])
 
 function emptyraster()
-    rast = geotiff(SimpleSDMResponse, joinpath(@__DIR__, "mask.tif"))
+    rast = geotiff(SimpleSDMResponse, joinpath(pwd(), "mapping", "mask.tif"))
     rast.grid[findall(!isnothing, rast.grid)] .= 0.0
     return rast
 end
@@ -34,10 +34,16 @@ for (k, v) in ranges
 end
 
 # Viral richness
-trefle = DataFrame(CSV.File(joinpath(@__DIR__, "..", "artifacts", "trefle.csv")))
-clover = DataFrame(CSV.File(joinpath(@__DIR__, "..", "data", "clover.csv")))
-hosts = unique(trefle.host)
-viruses = unique(trefle.virus)
+trefle = DataFrame(CSV.File(joinpath(pwd(), "mapping", "..", "artifacts", "trefle.csv")))
+clover = DataFrame(CSV.File(joinpath(pwd(), "mapping", "..", "data", "clover.csv")))
+hosts = String.(unique(trefle.host))
+viruses = String.(unique(trefle.virus))
+
+trefle.virus = String.(trefle.virus)
+trefle.host = String.(trefle.host)
+
+clover.Virus = String.(clover.Virus)
+clover.Host = String.(clover.Host)
 
 # Convert into networks
 A = zeros(Bool, (length(viruses), length(hosts)))
@@ -114,45 +120,45 @@ begin
     _pal_gained = :linear_worb_100_25_c53_n256
     _pal_divergence = Reverse(:roma)
 
-    fig = Figure(resolution=(1100, 780))
+    fig = Figure(resolution=(1100, 520))
 
-    ga1 = GeoAxis(fig[1, 2]; dest="+proj=$(_proj)", coastlines=_coast, title="A", subtitle="Known zoonotic hosts\n\n", titlealign=:left, subtitlecolor=:gray20)
+    ga1 = GeoAxis(fig[1, 3]; dest="+proj=$(_proj)", coastlines=_coast, title="B", subtitle="Known zoonotic hosts\n\n", titlealign=:left, subtitlecolor=:gray20)
     pl1 = GeoMakie.surface!(ga1, sprinkle(zhc)...; shading=false, interpolate=false, colormap=_pal_known)
 
-    ga2 = GeoAxis(fig[2, 2]; dest="+proj=$(_proj)", coastlines=_coast, title="B", subtitle="Predicted new zoonotic hosts\n\n", titlealign=:left, subtitlecolor=:gray20)
+    ga2 = GeoAxis(fig[2, 3]; dest="+proj=$(_proj)", coastlines=_coast, title="D", subtitle="Predicted new zoonotic hosts\n\n", titlealign=:left, subtitlecolor=:gray20)
     pl2 = GeoMakie.surface!(ga2, sprinkle(zht - zhc)...; shading=false, interpolate=false, colormap=_pal_gained)
 
-    _hotspots = rescale(zht - zhc, (0, 1)) - rescale(richness, (0, 1))
-    ga6 = GeoAxis(fig[3, 2]; dest="+proj=$(_proj)", coastlines=_coast, title="C", subtitle="Hotspots of zoonotic hosts gain\n\n", titlealign=:left, subtitlecolor=:gray20)
-    pl6 = GeoMakie.surface!(ga6, sprinkle(_hotspots)...; shading=false, interpolate=false, colormap=_pal_divergence, colorrange=(-0.5, 0.5))
+    #_hotspots = rescale(zht - zhc, (0, 1)) - rescale(richness, (0, 1))
+    #ga6 = GeoAxis(fig[3, 2]; dest="+proj=$(_proj)", coastlines=_coast, title="C", subtitle="Hotspots of zoonotic hosts gain\n\n", titlealign=:left, subtitlecolor=:gray20)
+    #pl6 = GeoMakie.surface!(ga6, sprinkle(_hotspots)...; shading=false, interpolate=false, colormap=_pal_divergence, colorrange=(-0.5, 0.5))
 
-    ga3 = GeoAxis(fig[1, 3]; dest="+proj=$(_proj)", coastlines=_coast, title="D", subtitle="Known interactions\n\n", titlealign=:left, subtitlecolor=:gray20)
+    ga3 = GeoAxis(fig[1, 2]; dest="+proj=$(_proj)", coastlines=_coast, title="A", subtitle="Known interactions\n\n", titlealign=:left, subtitlecolor=:gray20)
     pl3 = GeoMakie.surface!(ga3, sprinkle(inc)...; shading=false, interpolate=false, colormap=_pal_known)
 
-    ga4 = GeoAxis(fig[2, 3]; dest="+proj=$(_proj)", coastlines=_coast, title="E", subtitle="Predicted new interactions\n\n", titlealign=:left, subtitlecolor=:gray20)
+    ga4 = GeoAxis(fig[2, 2]; dest="+proj=$(_proj)", coastlines=_coast, title="C", subtitle="Predicted new interactions\n\n", titlealign=:left, subtitlecolor=:gray20)
     pl4 = GeoMakie.surface!(ga4, sprinkle(int - inc)...; shading=false, interpolate=false, colormap=_pal_gained)
 
-    _hotspots = rescale(int - inc, (0, 1)) - rescale(richness, (0, 1))
-    ga5 = GeoAxis(fig[3, 3]; dest="+proj=$(_proj)", coastlines=_coast, title="F", subtitle="Hotspots of interaction gain\n\n", titlealign=:left, subtitlecolor=:gray20)
-    pl5 = GeoMakie.surface!(ga5, sprinkle(_hotspots)...; shading=false, interpolate=false, colormap=_pal_divergence, colorrange=(-0.5, 0.5))
+    #_hotspots = rescale(int - inc, (0, 1)) - rescale(richness, (0, 1))
+    #ga5 = GeoAxis(fig[3, 3]; dest="+proj=$(_proj)", coastlines=_coast, title="F", subtitle="Hotspots of interaction gain\n\n", titlealign=:left, subtitlecolor=:gray20)
+    #pl5 = GeoMakie.surface!(ga5, sprinkle(_hotspots)...; shading=false, interpolate=false, colormap=_pal_divergence, colorrange=(-0.5, 0.5))
 
-    cb1 = Colorbar(fig[1, 1], pl1; height=Relative(0.45))
-    cb2 = Colorbar(fig[2, 1], pl2; height=Relative(0.45))
-    cb6 = Colorbar(fig[3, 1], pl6; height=Relative(0.45))
-    cb3 = Colorbar(fig[1, 4], pl3; height=Relative(0.45))
-    cb4 = Colorbar(fig[2, 4], pl4; height=Relative(0.45))
-    cb5 = Colorbar(fig[3, 4], pl5; height=Relative(0.45))
+    cb1 = Colorbar(fig[1, 4], pl1; height=Relative(0.45))
+    cb2 = Colorbar(fig[2, 4], pl2; height=Relative(0.45))
+    #cb6 = Colorbar(fig[3, 1], pl6; height=Relative(0.45))
+    cb3 = Colorbar(fig[1, 1], pl3; height=Relative(0.45))
+    cb4 = Colorbar(fig[2, 1], pl4; height=Relative(0.45))
+    #cb5 = Colorbar(fig[3, 4], pl5; height=Relative(0.45))
 
     datalims!(ga1)
     datalims!(ga2)
     datalims!(ga3)
     datalims!(ga4)
-    datalims!(ga5)
-    datalims!(ga6)
+    #datalims!(ga5)
+    #datalims!(ga6)
 
     fig
 end
-save(joinpath(@__DIR__, "..", "figures", "richness-pre-post.png"), fig, px_per_unit=2)
+save(joinpath(pwd(), "mapping", "..", "figures", "richness-pre-post.png"), fig, px_per_unit=2)
 
 # LCDB / SCBD
 @info "Finding the occupied patches"
@@ -268,7 +274,7 @@ begin
 
     fig
 end
-save(joinpath(@__DIR__, "..", "figures", "lcbd-pre-post.png"), fig, px_per_unit=2)
+save(joinpath(pwd(), "mapping", "..", "figures", "lcbd-pre-post.png"), fig, px_per_unit=2)
 
 @info "Plotting supp"
 begin
@@ -305,4 +311,4 @@ begin
 
     fig
 end
-save(joinpath(@__DIR__, "..", "figures", "lcbd-zoonotic.png"), fig, px_per_unit=2)
+save(joinpath(pwd(), "mapping", "..", "figures", "lcbd-zoonotic.png"), fig, px_per_unit=2)
